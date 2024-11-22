@@ -1,0 +1,18 @@
+---
+application_name: Zivio Assessor
+business_name: Zivio
+business_address: Cawley Priory, South Pallant, Chichester, West Sussex, PO19 1SY
+domain: assessor.zivio.net
+support_email: support@zivio.com
+default_from_email: Zivio Assessor <no-reply@zivio.net>
+background_job_processor: sidekiq
+email_provider: 
+personal_accounts: true
+apns: false
+fcm: false
+integrations:
+omniauth_providers:
+payment_processors:
+multitenancy:
+gems:
+- acts_as_tenant

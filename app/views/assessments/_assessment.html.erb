@@ -1,0 +1,13 @@
+<div id="<%= dom_id assessment %>">
+  <div class="mb-4">
+    <p class="text-sm font-medium text-gray-500">Name</p>
+    <%= assessment.name %> <%= render LabelComponent.new(text: assessment.translated_status, type: :success) %>
+  </div>
+  <div class="card">
+    <h3>Long Tenure SOWS</h3>
+    <p>SOWs for the 10 SOW workers with the longest tenure.</p>
+  </div>
+  <% if action_name != "show" %>
+    <%= link_to "View this assessment", assessment, class: "btn btn-secondary" %>
+  <% end %>
+</div>

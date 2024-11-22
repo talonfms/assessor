@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_21_183620) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_22_102444) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension "pg_catalog.plpgsql"
 
   create_table "account_invitations", force: :cascade do |t|
     t.bigint "account_id", null: false
@@ -116,6 +116,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_21_183620) do
     t.datetime "updated_at", null: false
     t.index ["token"], name: "index_api_tokens_on_token", unique: true
     t.index ["user_id"], name: "index_api_tokens_on_user_id"
+  end
+
+  create_table "assessments", force: :cascade do |t|
+    t.string "name"
+    t.bigint "account_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "status", default: "in_progress"
+    t.index ["account_id"], name: "index_assessments_on_account_id"
   end
 
   create_table "connected_accounts", force: :cascade do |t|
@@ -358,6 +367,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_21_183620) do
   add_foreign_key "accounts", "users", column: "owner_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "api_tokens", "users"
+  add_foreign_key "assessments", "accounts"
   add_foreign_key "pay_charges", "pay_customers", column: "customer_id"
   add_foreign_key "pay_payment_methods", "pay_customers", column: "customer_id"
   add_foreign_key "pay_subscriptions", "pay_customers", column: "customer_id"

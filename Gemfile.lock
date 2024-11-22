@@ -118,6 +118,8 @@ GEM
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
       uri (>= 0.13.1)
+    acts_as_tenant (1.0.1)
+      rails (>= 6.0)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
     ast (2.4.2)
@@ -237,6 +239,7 @@ GEM
       net-smtp
     marcel (1.0.4)
     matrix (0.4.2)
+    method_source (1.1.0)
     mini_magick (4.13.2)
     mini_mime (1.1.5)
     minitest (5.25.1)
@@ -351,6 +354,8 @@ GEM
     receipts (2.4.0)
       prawn (>= 1.3.0, < 3.0.0)
       prawn-table (~> 0.2.1)
+    redis-client (0.22.2)
+      connection_pool
     regexp_parser (2.9.2)
     reline (0.5.11)
       io-console (~> 0.5)
@@ -404,6 +409,11 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sidekiq (7.3.6)
+      connection_pool (>= 2.3.0)
+      logger
+      rack (>= 2.2.4)
+      redis-client (>= 0.22.2)
     smart_properties (1.17.0)
     solid_cable (3.0.2)
       actioncable (>= 7.2)
@@ -436,6 +446,8 @@ GEM
     thruster (0.1.9-x86_64-darwin)
     thruster (0.1.9-x86_64-linux)
     timeout (0.4.2)
+    translate_enum (0.2.0)
+      activesupport
     ttfunk (1.8.0)
       bigdecimal (~> 3.1)
     turbo-rails (2.0.11)
@@ -446,6 +458,10 @@ GEM
     unicode-display_width (2.6.0)
     uri (1.0.2)
     useragent (0.16.10)
+    view_component (3.20.0)
+      activesupport (>= 5.2.0, < 8.1)
+      concurrent-ruby (~> 1.0)
+      method_source (~> 1.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.1)
@@ -477,6 +493,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  acts_as_tenant (~> 1.0)
   bootsnap (>= 1.4.2)
   brakeman
   capybara (>= 3.39)
@@ -515,13 +532,16 @@ DEPENDENCIES
   rubocop-rails-omakase
   ruby-oembed (~> 0.18.0)
   selenium-webdriver (>= 4.20.1)
+  sidekiq
   solid_cable
   solid_cache
   solid_queue
   stimulus-rails (~> 1.0, >= 1.0.2)
   thruster
+  translate_enum
   turbo-rails (~> 2.0.3)
   tzinfo-data
+  view_component
   web-console (>= 4.1.0)
   webmock
 
