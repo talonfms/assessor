@@ -1,13 +1,67 @@
 <div id="<%= dom_id assessment %>">
-  <div class="mb-4">
-    <p class="text-sm font-medium text-gray-500">Name</p>
-    <%= assessment.name %> <%= render LabelComponent.new(text: assessment.translated_status, type: :success) %>
+  <div data-controller="tabs"
+     data-tabs-active-tab-class="tab"
+     data-tabs-inactive-tab-class="inactive">
+    <select id="" class="sm:hidden mb-4" data-action="tabs#change">
+      <option value="Tab 1">Tab 1</option>
+      <option value="Tab 2">Tab 2</option>
+    </select>
+    <nav class="tab-nav" aria-label="Tabs">
+      <a href="#"
+          data-tabs-target="tab"
+          data-action="click->tabs#change:prevent">
+        Assessment Input
+      </a>
+      <a href="#"
+          data-tabs-target="tab"
+          data-action="click->tabs#change:prevent">
+        Analysis
+      </a>
+    </nav>
+    <div class="hidden" data-tabs-target="panel">
+      <div class="flex flex-row">
+        <div class="basis-1/3">
+          <div class="p-8 bg-white dark:bg-gray-900 dark:border dark:border-gray-700 rounded shadow">
+            <div class="mb-4">
+              <p class="text-sm font-medium text-gray-500">Name</p>
+              <%= assessment.name %>
+            </div>
+            <div class="mb-4">
+              <p class="text-sm font-medium text-gray-500">Status</p>
+              <%= render LabelComponent.new(text: assessment.translated_status, type: :success) %>
+            </div>
+            <div class="mb-4">
+              <p class="text-sm font-medium text-gray-500">Created</p>
+              <%= l assessment.created_at, format: :long %>
+            </div>
+            <div class="mb-4">
+              <p class="text-sm font-medium text-gray-500">Progress</p>
+              <p class=" flex items-center">
+                <%= heroicon :check_circle %>
+                <span class="ml-2">Long Tenure SOWs</span>
+              </p>
+              <p class=" flex items-center">
+                <%= heroicon :empty_circle %>
+                <span class="ml-2">Finance Upload</span>
+              </p>
+              <p class=" flex items-center">
+                <%= heroicon :empty_circle %>
+                <span class="ml-2">Survey</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="basis-2/3">
+          <%= render assessment.sow_check%>
+        </div>
+      </div>
+    </div>
+    <div class="hidden" data-tabs-target="panel">
+      <% if assessment.in_progress? %>
+        <p>
+          Analysis is only available for completed assessments.
+        </p>
+      <% end %>
+    </div>
   </div>
-  <div class="card">
-    <h3>Long Tenure SOWS</h3>
-    <p>SOWs for the 10 SOW workers with the longest tenure.</p>
-  </div>
-  <% if action_name != "show" %>
-    <%= link_to "View this assessment", assessment, class: "btn btn-secondary" %>
-  <% end %>
 </div>

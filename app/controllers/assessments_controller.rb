@@ -28,7 +28,9 @@ class AssessmentsController < ApplicationController
   # POST /assessments or /assessments.json
   def create
     @assessment = current_account.assessments.build(assessment_params)
-
+    if @assessment.include_sow_check
+      @assessment.build_sow_check
+    end
     # Uncomment to authorize with Pundit
     # authorize @assessment
 
@@ -79,7 +81,7 @@ class AssessmentsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def assessment_params
-    params.require(:assessment).permit(:name, :account_id)
+    params.require(:assessment).permit(:name, :include_sow_check)
 
     # Uncomment to use Pundit permitted attributes
     # params.require(:assessment).permit(policy(@assessment).permitted_attributes)

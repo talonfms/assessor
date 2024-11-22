@@ -1,0 +1,72 @@
+<div class="ml-4 p-8 bg-white dark:bg-gray-900 dark:border dark:border-gray-700 rounded shadow">
+  <div class="flex justify-between items-center mb-4">
+    <h3>Long Tenure SOWS</h3>
+    <%= render RadialGaugeComponent.new(type: :dynamic, value: sow_check.files.count, max: 10) %>
+  </div>
+  <p class="my-4">Provide SOWs for SOW workers with the longest tenure.</p>
+  <p class="my-4">For the best results please provide 10 documents.</p>
+  <div class="relative overflow-x-auto">
+    <table class="w-full text-sm text-left text-gray-500">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+        <tr>
+          <th scope="col" class="px-6 py-3">File Name</th>
+          <th scope="col" class="px-6 py-3">Size</th>
+          <th scope="col" class="px-6 py-3">Upload Date</th>
+          <th scope="col" class="px-6 py-3">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% sow_check.files.each do | file | %>
+          <tr class="bg-white border-b">
+            <td class="px-6 py-4"><%= file.filename %></td>
+            <td class="px-6 py-4"><%= number_to_human_size(file.byte_size) %></td>
+            <td class="px-6 py-4"><%= l file.created_at, format: :long %></td>
+            <td class="px-6 py-4">
+              <%= button_to sow_check, 
+                    params: { sow_check: { files: sow_check.files.reject { |f| f.id == file.id }.map(&:signed_id) } },
+                    method: :patch,
+                    form: { data: { turbo_confirm: "Are you sure you want to delete this file?" } },
+                    class: "text-red-600 hover:text-red-900" do %>
+                <%= heroicon :trash%>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <% if sow_check.assessment.in_progress? %>
+    <div data-controller="modal">
+      <button class="btn btn-secondary my-4" data-action="click->modal#open:prevent">Upload files</button>
+      <dialog class="modal modal-lg" data-modal-target="dialog" data-action="click-&gt;modal#backdropClose">
+        <%= form_with(model: sow_check, id: dom_id(sow_check), local: false) do |form| %>
+          <% sow_check.files.each do |file| %>
+            <%= form.hidden_field :files, multiple: true, value: file.signed_id %>
+          <% end %>
+          <div class="modal-card">
+            <button type="button" data-action="modal#close:prevent">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
+                <line x1="18" x2="6" y1="6" y2="18"></line>
+                <line x1="6" x2="18" y1="6" y2="18"></line>
+              </svg>
+              <span class="sr-only">Close</span>
+            </button>
+            <div>
+              <h2 class="modal-title">Upload SOW documents</h2>
+              <div class="modal-body">
+                <div class="form-group">
+                  <%= form.label :files, "Upload SOW Documents" %>
+                  <%= form.file_field :files, multiple: true, direct_upload: true, class: "file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-50 file:text-gray-700 hover:file:bg-gray-100" %>
+                </div>
+              </div>
+            </div>
+            <div>
+              <button class="btn btn-secondary" data-action="click->modal#close:prevent">Cancel</button>
+              <%= form.submit "Continue", class: "btn btn-primary"%>
+            </div>
+          </div>
+        <% end %>
+      </dialog>
+    </div>
+  <% end %>
+</div>

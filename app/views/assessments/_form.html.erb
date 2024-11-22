@@ -1,14 +1,28 @@
 <%= form_with(model: assessment) do |form| %>
   <%= render "error_messages", resource: form.object %>
-
   <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name, class: "form-control" %>
+    <%= form.text_field :name, class: "form-control", value: form.object.name || "Services Procurement SOW Light Assessment" %>
   </div>
-
+  <% unless assessment.persisted? %>
+    <div class="form-group">
+      <%= form.label "Included Checks" %>
+      <div class="form-picker-group">
+        <%= form.check_box :include_sow_check, checked: true%>
+        <%= form.label :include_sow_check, "SOW Check"%>
+      </div>
+      <div class="form-picker-group">
+        <input type="checkbox" id="checkbox-2" checked>
+        <label for="checkbox-2">Finance Check</label>
+      </div>
+      <div class="form-picker-group">
+        <input type="checkbox" id="checkbox-3" checked>
+        <label for="checkbox-3">Engagement Manager Survey</label>
+      </div>
+    </div>
+  <% end%>
   <div>
     <%= form.button button_text(form.send(:submit_default_value)), class: "btn btn-primary" %>
-
     <% if form.object.new_record? %>
       <%= link_to t("cancel"), assessments_path, class: "btn btn-secondary" %>
     <% else %>
