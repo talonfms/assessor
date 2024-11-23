@@ -50,7 +50,11 @@
                   <span class="ml-2">Long Tenure SOWs</span>
                 </p>
                 <p class=" flex items-center">
-                  <%= heroicon :empty_circle %>
+                  <% if assessment.finance_check.complete? %>
+                    <%= heroicon :check_circle %>
+                  <% else %>
+                    <%= heroicon :empty_circle %>
+                  <% end %>
                   <span class="ml-2">Finance Upload</span>
                 </p>
                 <p class=" flex items-center">
@@ -77,6 +81,7 @@
             </div>
           </div>
           <%= render assessment.sow_check%>
+          <%= render assessment.finance_check%>
         </div>
       </div>
     </div>

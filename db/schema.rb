@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_22_110522) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_23_121139) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -140,6 +140,17 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_22_110522) do
     t.string "access_token_secret"
     t.string "owner_type"
     t.index ["owner_id", "owner_type"], name: "index_connected_accounts_on_owner_id_and_owner_type"
+  end
+
+  create_table "finance_checks", force: :cascade do |t|
+    t.bigint "assessment_id", null: false
+    t.bigint "account_id", null: false
+    t.integer "min_required_files"
+    t.integer "target_files"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_finance_checks_on_account_id"
+    t.index ["assessment_id"], name: "index_finance_checks_on_assessment_id"
   end
 
   create_table "inbound_webhooks", force: :cascade do |t|
@@ -380,6 +391,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_22_110522) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "api_tokens", "users"
   add_foreign_key "assessments", "accounts"
+  add_foreign_key "finance_checks", "accounts"
+  add_foreign_key "finance_checks", "assessments"
   add_foreign_key "pay_charges", "pay_customers", column: "customer_id"
   add_foreign_key "pay_payment_methods", "pay_customers", column: "customer_id"
   add_foreign_key "pay_subscriptions", "pay_customers", column: "customer_id"

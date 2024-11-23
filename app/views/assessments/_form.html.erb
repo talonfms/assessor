@@ -12,8 +12,8 @@
         <%= form.label :include_sow_check, "SOW Check"%>
       </div>
       <div class="form-picker-group">
-        <input type="checkbox" id="checkbox-2" checked>
-        <label for="checkbox-2">Finance Check</label>
+        <%= form.check_box :include_finance_check, checked: true%>
+        <%= form.label :include_finance_check, "SOW Check"%>
       </div>
       <div class="form-picker-group">
         <input type="checkbox" id="checkbox-3" checked>
