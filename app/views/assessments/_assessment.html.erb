@@ -28,30 +28,54 @@
             </div>
             <div class="mb-4">
               <p class="text-sm font-medium text-gray-500">Status</p>
-              <%= render LabelComponent.new(text: assessment.translated_status, type: :success) %>
+              <%= render LabelComponent.new(text: assessment.translated_status, type: :info) %>
             </div>
             <div class="mb-4">
               <p class="text-sm font-medium text-gray-500">Created</p>
               <%= l assessment.created_at, format: :long %>
             </div>
-            <div class="mb-4">
-              <p class="text-sm font-medium text-gray-500">Progress</p>
-              <p class=" flex items-center">
-                <%= heroicon :check_circle %>
-                <span class="ml-2">Long Tenure SOWs</span>
-              </p>
-              <p class=" flex items-center">
-                <%= heroicon :empty_circle %>
-                <span class="ml-2">Finance Upload</span>
-              </p>
-              <p class=" flex items-center">
-                <%= heroicon :empty_circle %>
-                <span class="ml-2">Survey</span>
-              </p>
-            </div>
           </div>
         </div>
         <div class="basis-2/3">
+          <div class="ml-4 mb-4 p-8 bg-white dark:bg-gray-900 dark:border dark:border-gray-700 rounded shadow">
+            <div class="flex justify-between items-center mb-4">
+              <div>
+                <p class="text-sm font-medium text-gray-500">Progress</p>
+                <p class=" flex items-center">
+                  <% if assessment.sow_check.complete? %>
+                    <%= heroicon :check_circle %>
+                  <% else %>
+                    <%= heroicon :empty_circle %>
+                  <% end %>
+                  <span class="ml-2">Long Tenure SOWs</span>
+                </p>
+                <p class=" flex items-center">
+                  <%= heroicon :empty_circle %>
+                  <span class="ml-2">Finance Upload</span>
+                </p>
+                <p class=" flex items-center">
+                  <%= heroicon :empty_circle %>
+                  <span class="ml-2">Survey</span>
+                </p>
+              </div>
+              <div>
+                <% if assessment.submittable? %>
+                  <%= button_to "Submit Assessment", assessment_path(assessment, assessment: { status: "completed" }), 
+              method: :patch,
+              class: "btn btn-primary",
+              form: { 
+                data: { 
+                  turbo_confirm: "Are you sure you want to submit this assessment? This action cannot be undone." 
+                }
+              } %>
+                <% else %>
+                  <div class="inline-block" data-controller="tooltip" data-tippy-content="Please complete all steps before submission" data-tippy-delay="0" data-tippy-arrow="true" data-tippy-size="regular" data-tippy-animation="fade">
+                    <%= button_to "Submit Assessment", nil, disabled: true, class: "btn btn-primary" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
           <%= render assessment.sow_check%>
         </div>
       </div>

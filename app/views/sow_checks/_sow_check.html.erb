@@ -1,6 +1,10 @@
 <div class="ml-4 p-8 bg-white dark:bg-gray-900 dark:border dark:border-gray-700 rounded shadow">
   <div class="flex justify-between items-center mb-4">
-    <h3>Long Tenure SOWS</h3>
+    <h3>Long Tenure SOWS  <% if sow_check.complete? %>
+        <%= render LabelComponent.new(text: "Completed", type: :success, classes: "ml-2") %>
+      <% else %>
+        <%= render LabelComponent.new(text: "In Progress", type: :info, classes: "ml-2") %>
+      <% end %></h3>
     <%= render RadialGaugeComponent.new(type: :dynamic, value: sow_check.files.count, max: 10) %>
   </div>
   <p class="my-4">Provide SOWs for SOW workers with the longest tenure.</p>
@@ -29,6 +33,13 @@
                     class: "text-red-600 hover:text-red-900" do %>
                 <%= heroicon :trash%>
               <% end %>
+            </td>
+          </tr>
+        <% end %>
+        <% if sow_check.files.blank? %>
+          <tr class="bg-white border-b">
+            <td colspan="4" class="px-6 py-4 text-center text-gray-500">
+              No files uploaded yet
             </td>
           </tr>
         <% end %>

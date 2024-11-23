@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class LabelComponent < ViewComponent::Base
-  def initialize(text:, type: :default)
+  def initialize(text:, type: :default, classes: "")
     @text = text
     @type = type
+    @classes = classes
   end
 
   private

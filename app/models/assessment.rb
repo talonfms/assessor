@@ -10,4 +10,8 @@ class Assessment < ApplicationRecord
   translate_enum :status
 
   attr_accessor :include_sow_check
+
+  def submittable?
+    in_progress? && sow_check&.complete?
+  end
 end
