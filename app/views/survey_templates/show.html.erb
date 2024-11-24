@@ -1,0 +1,17 @@
+<%= content_for :title, "Survey Templates ##{@survey_template.id}" %>
+<%= turbo_stream_from @survey_template %>
+
+<div class="container px-4 mx-auto my-8">
+  <div class="flex items-center justify-between mb-4">
+    <h1 class="h3">
+      <%= link_to "Survey Templates", survey_templates_path, class: "text-black dark:text-white" %>
+      <span class="text-gray-400 font-light mx-2">\</span>
+      Survey Template #<%= @survey_template.id %>
+    </h1>
+    <%= link_to t("edit"), edit_survey_template_path(@survey_template), class: "btn btn-secondary" %>
+  </div>
+
+  <div class="p-8 bg-white dark:bg-gray-900 dark:border dark:border-gray-700 rounded shadow">
+    <%= render @survey_template %>
+  </div>
+</div>

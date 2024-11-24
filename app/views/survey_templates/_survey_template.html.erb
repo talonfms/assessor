@@ -1,0 +1,13 @@
+<div id="<%= dom_id survey_template %>">
+  <div class="mb-4">
+    <p class="text-sm font-medium text-gray-500">Name</p>
+    <%= survey_template.name %>
+  </div>
+  <div class="mb-4">
+    <p class="text-sm font-medium text-gray-500">Description</p>
+    <%= survey_template.description %>
+  </div>
+  <% if action_name != "show" %>
+    <%= link_to "View this survey template", survey_template, class: "btn btn-secondary" %>
+  <% end %>
+</div>

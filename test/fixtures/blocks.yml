@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  template_version: one
+  block_type: 1
+  question: MyString
+  position: 1
+  config: 
+
+two:
+  template_version: two
+  block_type: 1
+  question: MyString
+  position: 1
+  config: 

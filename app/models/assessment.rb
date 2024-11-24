@@ -4,6 +4,7 @@ class Assessment < ApplicationRecord
   broadcasts_refreshes
   acts_as_tenant :account
   belongs_to :account
+  belongs_to :assessment_version
   has_one :sow_check, dependent: :destroy
   has_one :finance_check, dependent: :destroy
 

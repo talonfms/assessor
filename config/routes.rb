@@ -1,5 +1,6 @@
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
+  resources :survey_templates
   resources :assessments
   resources :finance_checks, only: [:update]
   resources :sow_checks, only: [:update]
