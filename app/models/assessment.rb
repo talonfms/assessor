@@ -7,7 +7,7 @@ class Assessment < ApplicationRecord
   has_one :sow_check, dependent: :destroy
   has_one :finance_check, dependent: :destroy
 
-  enum :status, %w[in_progress completed].index_by(&:itself)
+  enum :status, %w[in_progress submitted completed].index_by(&:itself)
   translate_enum :status
 
   attr_accessor :include_sow_check, :include_finance_check

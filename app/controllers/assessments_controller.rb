@@ -84,7 +84,7 @@ class AssessmentsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def assessment_params
-    params.require(:assessment).permit(:name, :include_sow_check, :include_finance_check)
+    params.require(:assessment).permit(:name, :include_sow_check, :include_finance_check, :status)
 
     # Uncomment to use Pundit permitted attributes
     # params.require(:assessment).permit(policy(@assessment).permitted_attributes)

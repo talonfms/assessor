@@ -63,8 +63,8 @@
                 </p>
               </div>
               <div>
-                <% if assessment.submittable? %>
-                  <%= button_to "Submit Assessment", assessment_path(assessment, assessment: { status: "completed" }), 
+                <% if assessment.in_progress? %>
+                  <%= button_to "Submit Assessment", assessment_path(assessment, assessment: { status: "submitted" }), 
               method: :patch,
               class: "btn btn-primary",
               form: { 
@@ -72,6 +72,8 @@
                   turbo_confirm: "Are you sure you want to submit this assessment? This action cannot be undone." 
                 }
               } %>
+                <% elsif assessment.submitted? %>
+                  <p><%= render LabelComponent.new(text: "Assessment Submitted", type: :info) %></p>
                 <% else %>
                   <div class="inline-block" data-controller="tooltip" data-tippy-content="Please complete all steps before submission" data-tippy-delay="0" data-tippy-arrow="true" data-tippy-size="regular" data-tippy-animation="fade">
                     <%= button_to "Submit Assessment", nil, disabled: true, class: "btn btn-primary" %>
@@ -89,6 +91,10 @@
       <% if assessment.in_progress? %>
         <p>
           Analysis is only available for completed assessments.
+        </p>
+      <% elsif assessment.submitted? %>
+        <p>
+          Analysis is underway. You will be notified when your results are ready.
         </p>
       <% end %>
     </div>

@@ -539,6 +539,7 @@ en:
         status_list:
           in_progress: In Progress
           completed: Completed
+          submitted: Submitted
       api_token:
         last_used_at: "Last Used"
         created_at: "Created"
