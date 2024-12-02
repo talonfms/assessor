@@ -31,9 +31,9 @@ GIT
 
 GIT
   remote: https://github.com/excid3/mailbin.git
-  revision: 1901a2a13c6eceec59282bfc1ab39eb0dc0c69bf
+  revision: d2e592dac08b9fb769c49bc9fd58d236f4db6052
   specs:
-    mailbin (0.1.1)
+    mailbin (1.0.0)
       importmap-rails
       rails (>= 7.1.0)
       turbo-rails
@@ -242,7 +242,7 @@ GEM
     method_source (1.1.0)
     mini_magick (4.13.2)
     mini_mime (1.1.5)
-    minitest (5.25.1)
+    minitest (5.25.2)
     msgpack (1.7.5)
     name_of_person (1.1.3)
       activesupport (>= 5.2.0)
@@ -357,7 +357,7 @@ GEM
     redis-client (0.22.2)
       connection_pool
     regexp_parser (2.9.2)
-    reline (0.5.11)
+    reline (0.5.12)
       io-console (~> 0.5)
     responders (3.1.1)
       actionpack (>= 5.2)
