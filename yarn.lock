@@ -355,10 +355,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rails/actioncable@npm:^8.0.0-beta1":
-  version: 8.0.0
-  resolution: "@rails/actioncable@npm:8.0.0"
-  checksum: 10c0/07cf13277594e530cdeff85b0416d0872b09ebfe40f9bfb5bbe612c74d7439c401981f8b29971e914af502bfafbf95ab661199a648da8dfa46058c1fbd40d658
+"@rails/actioncable@npm:^8.0.100":
+  version: 8.0.100
+  resolution: "@rails/actioncable@npm:8.0.100"
+  checksum: 10c0/ae8870083e5c48448bd1d77268d28a16d7eee6d213dac8a6e20888c47d89ac959c4e835a613beaaa71b13b9aaaea14c4fb6d67120f972d174f1f899dd5a37e45
   languageName: node
   linkType: hard
 
@@ -1226,7 +1226,7 @@ __metadata:
     "@hotwired/hotwire-native-bridge": "npm:^1.0.0"
     "@hotwired/stimulus": "npm:^3.2.2"
     "@hotwired/turbo-rails": "npm:^8.0.12"
-    "@rails/actioncable": "npm:^8.0.0-beta1"
+    "@rails/actioncable": "npm:^8.0.100"
     "@rails/actiontext": "npm:^8.0.0-beta1"
     "@rails/activestorage": "npm:^8.0.0-beta1"
     "@rails/request.js": "npm:^0.0.11"
