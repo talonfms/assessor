@@ -389,6 +389,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@stimulus-components/auto-submit@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "@stimulus-components/auto-submit@npm:6.0.0"
+  peerDependencies:
+    "@hotwired/stimulus": ^3
+  checksum: 10c0/e15b5f3400105d7015ca350dd1a2db93a60cd32f5b6be77751de22c30ee84d2e4755f943186ccd0da742c1751b60cfbe0e3deba67ea8b219f27449d78cc29816
+  languageName: node
+  linkType: hard
+
+"@stimulus-components/sortable@npm:^5.0.1":
+  version: 5.0.1
+  resolution: "@stimulus-components/sortable@npm:5.0.1"
+  peerDependencies:
+    "@hotwired/stimulus": ^3.0.0
+    "@rails/request.js": ^0.0.8
+    sortablejs: ^1.15.0
+  checksum: 10c0/63663ec4f03fbfba94409749dba97ba437c51e6c651d22e6fa7b411ebec74edc8bf67be55153d188bbc25b73f96c67b7b5bdf3b3477d410d7e31865622c5cb8b
+  languageName: node
+  linkType: hard
+
 "@tailwindcss/aspect-ratio@npm:^0.4.0":
   version: 0.4.2
   resolution: "@tailwindcss/aspect-ratio@npm:0.4.2"
@@ -1230,6 +1250,8 @@ __metadata:
     "@rails/actiontext": "npm:^8.0.0-beta1"
     "@rails/activestorage": "npm:^8.0.0-beta1"
     "@rails/request.js": "npm:^0.0.11"
+    "@stimulus-components/auto-submit": "npm:^6.0.0"
+    "@stimulus-components/sortable": "npm:^5.0.1"
     "@tailwindcss/aspect-ratio": "npm:^0.4.0"
     "@tailwindcss/forms": "npm:^0.5.0"
     "@tailwindcss/typography": "npm:^0.5.0"
@@ -1244,6 +1266,7 @@ __metadata:
     local-time: "npm:^3.0.0"
     postcss: "npm:^8.4.33"
     postcss-import: "npm:^16.0.1"
+    sortablejs: "npm:^1.15.4"
     stimulus-flatpickr: "npm:^3.0.0-0"
     tailwindcss: "npm:^3.4.1"
     tailwindcss-stimulus-components: "npm:^6.0.0"
@@ -1899,6 +1922,13 @@ __metadata:
     ip-address: "npm:^9.0.5"
     smart-buffer: "npm:^4.2.0"
   checksum: 10c0/d54a52bf9325165770b674a67241143a3d8b4e4c8884560c4e0e078aace2a728dffc7f70150660f51b85797c4e1a3b82f9b7aa25e0a0ceae1a243365da5c51a7
+  languageName: node
+  linkType: hard
+
+"sortablejs@npm:^1.15.4":
+  version: 1.15.4
+  resolution: "sortablejs@npm:1.15.4"
+  checksum: 10c0/aa22614b8aadc0253eb19b88c29d748af37bb3ab3d16a58c619a3bc806a96b5742e51908bffe94ab4d75a6f7458ea1524a4619c109a1e0716bb72b2ae25463e5
   languageName: node
   linkType: hard
 

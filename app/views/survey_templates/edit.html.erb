@@ -1,5 +1,4 @@
 <%= content_for :title, t("scaffold.edit.title", model: "Survey Template") %>
-
 <div class="container mx-auto px-4 my-8">
   <div class="flex items-center justify-between mb-4">
     <h1 class="h3">
@@ -9,8 +8,42 @@
     </h1>
     <%= button_to t("delete"), @survey_template, method: :delete, class: "btn btn-secondary", form: { data: { turbo_confirm: t("are_you_sure") } } %>
   </div>
-
   <div class="p-8 bg-white dark:bg-gray-900 dark:border dark:border-gray-700 rounded shadow">
-    <%= render "form", survey_template: @survey_template %>
+    <div class="flex min-h-screen">
+      <!-- Left Sidebar -->
+      <div class="w-1/4 bg-white border-r border-gray-200 p-4">
+        <h2><%= @survey_template.name %></h2>
+        <h3>Blocks</h3>
+        <div id="blocks-sidebar">
+          <%= render "sidebar", template_version: @template_version %>
+        </div>
+      </div>
+      <!-- Main Content -->
+      <div class="w-1/2 p-4">
+        <div class="text-center mb-4">
+          <%= render "blocks/add", template_version: @template_version%>
+        </div>
+        <% if @block.present? %>
+          <div class="bg-white shadow-md rounded-lg p-6 mb-4">
+            <div class="relative lg:mx-6 mt-[1rem] bg-white custom-bg-color rounded-md h-[calc(100vh_-_13rem)] border border-dashed border-gray-500 bg-cover bg-center bg-no-repeat  custom-form-font">
+              <div class="h-full flex items-center justify-center mx-auto overflow-y-auto scrollbar-hide">
+                <fieldset class="transition-all overflow-auto max-h-full py-12 scrollbar-hide w-8/12 preview-form">
+                  <%= render 'blocks/previews/block', template_version: @template_version, block: @block %>
+                </fieldset>
+              </div>
+            </div>
+          </div>
+          <div class="text-center">
+            <%= render "blocks/add", template_version: @template_version%>
+          </div>
+        <% end %>
+      </div>
+      <!-- Right Sidebar -->
+      <div class="w-1/4 bg-white border-l border-gray-200 p-4">
+        <% if @block.present? %>
+          <%= render 'blocks/form', template_version: @template_version, block: @block %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

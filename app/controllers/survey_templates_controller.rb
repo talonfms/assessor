@@ -23,6 +23,8 @@ class SurveyTemplatesController < ApplicationController
 
   # GET /survey_templates/1/edit
   def edit
+    @blocks = @template_version.blocks.includes(:block_options)
+    @block = @blocks.find_by(id: params[:block_id]) || @blocks.first
   end
 
   # POST /survey_templates or /survey_templates.json
@@ -83,7 +85,7 @@ class SurveyTemplatesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_survey_template
     @survey_template = current_account.survey_templates.find(params[:id])
-
+    @template_version = @survey_template.latest_version
     # Uncomment to authorize with Pundit
     # authorize @survey_template
   rescue ActiveRecord::RecordNotFound

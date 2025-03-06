@@ -1,0 +1,6 @@
+<%= form.collection_select :block_group_id, 
+    template_version.block_groups, 
+    :id, 
+    :name,
+    { include_blank: "No Group" },
+    { class: "form-control", data: { action: "auto-submit#submit" } } %>

@@ -1,0 +1,10 @@
+<div class="form-group">
+  <%= form.label :response_data, block.question, class: "control-label " %>
+  <% if block.description.present? %>
+    <p class="mt-1 text-sm leading-6 text-gray-600"><%= block.description %></p>
+  <% end %>
+  <%= form.text_field :response_data, name: "survey_response[responses_attributes][][response_data][text]", 
+                      class: 'form-control', placeholder: block.placeholder,
+                      minlength: block.min_length, maxlength: block.max_length,
+                      required: block.required? %>
+</div>

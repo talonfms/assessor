@@ -1,0 +1,12 @@
+<div class="form-group">
+  <%= form.label :placeholder %>
+  <%= form.text_field :placeholder, class: 'form-control', data: { action: 'auto-submit#submit' } %>
+</div>
+<div class="form-group">
+  <%= form.label :min_length %>
+  <%= form.number_field :min_length, class: 'form-control', data: { action: 'auto-submit#submit' } %>
+</div>
+<div class="form-group">
+  <%= form.label :max_length %>
+  <%= form.number_field :max_length, class: 'form-control', data: { action: 'auto-submit#submit' } %>
+</div>

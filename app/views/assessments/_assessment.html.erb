@@ -28,7 +28,7 @@
             </div>
             <div class="mb-4">
               <p class="text-sm font-medium text-gray-500">Status</p>
-              <%= render LabelComponent.new(text: assessment.translated_status, type: :info) %>
+              <%= assessment_label(assessment) %>
             </div>
             <div class="mb-4">
               <p class="text-sm font-medium text-gray-500">Created</p>
@@ -47,7 +47,7 @@
                   <% else %>
                     <%= heroicon :empty_circle %>
                   <% end %>
-                  <span class="ml-2">Long Tenure SOWs</span>
+                  <span class="ml-2">Statement of Work (SOW) Documents</span>
                 </p>
                 <p class=" flex items-center">
                   <% if assessment.finance_check.complete? %>
@@ -55,7 +55,7 @@
                   <% else %>
                     <%= heroicon :empty_circle %>
                   <% end %>
-                  <span class="ml-2">Finance Upload</span>
+                  <span class="ml-2">Accounts Payable Extract</span>
                 </p>
                 <p class=" flex items-center">
                   <%= heroicon :empty_circle %>
@@ -82,6 +82,7 @@
               </div>
             </div>
           </div>
+          <%= render assessment.template_version, assessment: assessment %>
           <%= render assessment.sow_check%>
           <%= render assessment.finance_check%>
         </div>

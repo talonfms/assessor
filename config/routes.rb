@@ -1,9 +1,10 @@
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
-  resources :survey_templates
-  resources :assessments
-  resources :finance_checks, only: [:update]
-  resources :sow_checks, only: [:update]
+  namespace :public, path: "p" do
+    resources :survey_responses, param: :token, only: [:show, :create], path: "responses" do
+      get :thank_you, on: :member
+    end
+  end
 
   draw :accounts
   draw :api
@@ -40,6 +41,20 @@ Rails.application.routes.draw do
 
   authenticated :user do
     root to: "dashboard#show", as: :user_root
+    resources :survey_templates
+    resources :template_versions do
+      resources :blocks, except: %i[index show] do
+        member do
+          post :reorder
+        end
+      end
+      resources :block_groups, only: [:create]
+    end
+    resources :block_options, only: %i[create new update destroy]
+    resources :assessments
+    resources :finance_checks, only: [:update]
+    resources :sow_checks, only: [:update]
+
     # Alternate route to use if logged in users should still see public root
     # get "/dashboard", to: "dashboard#show", as: :user_root
   end

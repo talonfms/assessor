@@ -432,6 +432,10 @@ en:
       stripe:
         credit_or_debit_card: "Credit or debit card"
 
+  template_versions:
+    template_version:
+      click_to_copy: "Click to copy"
+
   account:
     passwords:
       updated: "Your password was changed successfully."

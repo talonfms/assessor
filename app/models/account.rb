@@ -13,6 +13,7 @@ class Account < ApplicationRecord
   has_many :users, through: :account_users
   has_many :assessments, dependent: :destroy
   has_many :survey_templates, dependent: :destroy
+  has_many :template_versions, through: :survey_templates
 
   scope :personal, -> { where(personal: true) }
   scope :team, -> { where(personal: false) }

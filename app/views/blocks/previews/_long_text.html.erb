@@ -1,0 +1,9 @@
+<div class="form-group">
+  <%= form.label :response_data, block.question, class: "control-label " %>
+  <% if block.description.present? %>
+    <p class="mt-1 text-sm leading-6 text-gray-600"><%= block.description %></p>
+  <% end %>
+  <%= form.text_area :response_data, class: 'form-control', placeholder: block.placeholder,
+                      rows: 4,
+                      required: block.required?, disabled: true %>
+</div>

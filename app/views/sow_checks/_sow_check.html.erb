@@ -1,6 +1,6 @@
 <div class="ml-4 p-8 bg-white dark:bg-gray-900 dark:border dark:border-gray-700 rounded shadow">
   <div class="flex justify-between items-center mb-4">
-    <h3>Long Tenure SOWS  <% if sow_check.complete? %>
+    <h3>Statement of Work (SOW) Documents <% if sow_check.complete? %>
         <%= render LabelComponent.new(text: "Completed", type: :success, classes: "ml-2") %>
       <% else %>
         <%= render LabelComponent.new(text: "In Progress", type: :info, classes: "ml-2") %>

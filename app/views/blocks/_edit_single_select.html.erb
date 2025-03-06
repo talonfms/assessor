@@ -1,0 +1,18 @@
+<div id="<%=dom_id(block)%>-block-options">
+  <%= form.label :options %>
+  <ul data-controller="sortable" data-sortable-response-kind-value="turbo_stream" data-sortable-handle-value=".handle" id="<%=dom_id(block)%>-block-options-sortable">
+    <%= render "blocks/block_options", block: block, form: form%>
+  </ul>
+  <%= link_to "Add Option", 
+      new_block_option_path(block_id: block.id), 
+      class: "btn btn-primary btn-sm mb-2",
+      data: { 
+        turbo_stream: true,
+        action: "click->sortable#update" 
+      } %>
+  <div class="checkbox">
+    <label>
+      <%= form.check_box :randomize_options %> Randomize Options
+    </label>
+  </div>
+</div>

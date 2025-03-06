@@ -15,6 +15,7 @@ module.exports = {
 
   content: [
     './app/components/**/*.rb',
+    './app/components/**/*.erb',
     './app/helpers/**/*.rb',
     './app/javascript/**/*.js',
     './app/views/**/*.erb',

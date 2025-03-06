@@ -1,0 +1,19 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-2xl font-bold mb-6"><%= @assessment.name %></h1>
+  <%= form_with(model: [:public, @survey_response], local: true) do |form| %>
+    <%= hidden_field_tag :token, params[:token] %>
+    <% @template_version.blocks.each do |block| %>
+      <div class="mb-8 p-6 bg-white rounded-lg shadow">
+        <%= fields_for :responses do |response_form| %>
+          <%= response_form.hidden_field :block_id, name: "survey_response[responses_attributes][][block_id]", value: block.id %>
+          <%= render "blocks/previews/#{block.block_type}", 
+                    form: response_form,
+                    block: block %>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="mt-6">
+      <%= form.submit "Submit Survey", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

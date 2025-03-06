@@ -1,0 +1,8 @@
+<%= turbo_stream.append "#{dom_id(@block_option.block)}-block-options-sortable" do %>
+  <%= fields_for :block, @block do |f| %>
+    <%= f.fields_for :block_options, @block_option, child_index: Time.current.to_i do |child_form| %>
+      <%= render "blocks/block_option", block_option: @block_option, form: child_form %>
+    <% end %>
+  <% end %>
+<% end %>
+<%= turbo_stream.replace dom_id(@block, "preview"), partial: "blocks/previews/block", locals: {template_version: @template_version, block: @block} %>

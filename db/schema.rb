@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_24_211122) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_30_135941) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -125,8 +125,19 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_24_211122) do
     t.datetime "updated_at", null: false
     t.string "status", default: "in_progress"
     t.bigint "template_version_id"
+    t.string "token"
     t.index ["account_id"], name: "index_assessments_on_account_id"
     t.index ["template_version_id"], name: "index_assessments_on_template_version_id"
+  end
+
+  create_table "block_groups", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.bigint "template_version_id", null: false
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["template_version_id"], name: "index_block_groups_on_template_version_id"
   end
 
   create_table "block_options", force: :cascade do |t|
@@ -147,6 +158,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_24_211122) do
     t.jsonb "config"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "block_group_id"
+    t.index ["block_group_id"], name: "index_blocks_on_block_group_id"
     t.index ["template_version_id"], name: "index_blocks_on_template_version_id"
   end
 
@@ -352,6 +365,16 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_24_211122) do
     t.string "contact_url"
   end
 
+  create_table "responses", force: :cascade do |t|
+    t.bigint "block_id", null: false
+    t.bigint "survey_response_id", null: false
+    t.jsonb "response_data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["block_id"], name: "index_responses_on_block_id"
+    t.index ["survey_response_id"], name: "index_responses_on_survey_response_id"
+  end
+
   create_table "sow_checks", force: :cascade do |t|
     t.bigint "assessment_id", null: false
     t.bigint "account_id", null: false
@@ -362,6 +385,17 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_24_211122) do
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_sow_checks_on_account_id"
     t.index ["assessment_id"], name: "index_sow_checks_on_assessment_id"
+  end
+
+  create_table "survey_responses", force: :cascade do |t|
+    t.bigint "assessment_id", null: false
+    t.bigint "respondent_id"
+    t.string "respondent_email"
+    t.datetime "completed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assessment_id"], name: "index_survey_responses_on_assessment_id"
+    t.index ["respondent_id"], name: "index_survey_responses_on_respondent_id"
   end
 
   create_table "survey_templates", force: :cascade do |t|
@@ -436,15 +470,21 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_24_211122) do
   add_foreign_key "api_tokens", "users"
   add_foreign_key "assessments", "accounts"
   add_foreign_key "assessments", "template_versions"
+  add_foreign_key "block_groups", "template_versions"
   add_foreign_key "block_options", "blocks"
+  add_foreign_key "blocks", "block_groups"
   add_foreign_key "blocks", "template_versions"
   add_foreign_key "finance_checks", "accounts"
   add_foreign_key "finance_checks", "assessments"
   add_foreign_key "pay_charges", "pay_customers", column: "customer_id"
   add_foreign_key "pay_payment_methods", "pay_customers", column: "customer_id"
   add_foreign_key "pay_subscriptions", "pay_customers", column: "customer_id"
+  add_foreign_key "responses", "blocks"
+  add_foreign_key "responses", "survey_responses"
   add_foreign_key "sow_checks", "accounts"
   add_foreign_key "sow_checks", "assessments"
+  add_foreign_key "survey_responses", "assessments"
+  add_foreign_key "survey_responses", "users", column: "respondent_id"
   add_foreign_key "survey_templates", "accounts"
   add_foreign_key "template_versions", "survey_templates"
   add_foreign_key "template_versions", "users", column: "created_by_id"

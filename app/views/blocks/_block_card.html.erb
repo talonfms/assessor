@@ -1,0 +1,9 @@
+<!-- app/views/blocks/_block.html.erb -->
+<div class="list-group-item" data-block-id="<%= block.id %>">
+  <%= block.question %>
+  <span class="badge"><%= block.block_type %></span>
+  <div class="pull-right">
+    <button data-action="click->blocks#editBlock" data-blocks-id-param="<%= block.id %>" class="btn btn-xs btn-primary">Edit</button>
+    <button data-action="click->blocks#deleteBlock" data-blocks-id-param="<%= block.id %>" class="btn btn-xs btn-danger">Delete</button>
+  </div>
+</div>

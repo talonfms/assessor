@@ -1,0 +1,18 @@
+<div class="form-group" data-controller="single-select">
+  <%= form.label :response_data, block.question, class: "control-label " %>
+  <% if block.description.present? %>
+    <p class="mt-1 text-sm leading-6 text-gray-600"><%= block.description %></p>
+  <% end %>
+  <%= hidden_field_tag "survey_response[responses_attributes][][response_data][block_option_id]", nil, data: { single_select_target: "input" } %>
+  <div class="cmt-2 space-y-2">
+    <% block.block_options.order(:position).each do |option| %>
+      <button type="button" 
+              data-action="single-select#select"
+              data-value="<%= option.id %>"
+              data-single-select-target="button"
+              class="option-button w-full text-left px-4 py-2 my-1 border rounded-md hover:bg-gray-50">
+        <%= option.key %>
+      </button>
+    <% end %>
+  </div>
+</div>

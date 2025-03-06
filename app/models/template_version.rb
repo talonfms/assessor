@@ -3,6 +3,7 @@ class TemplateVersion < ApplicationRecord
   belongs_to :created_by, class_name: "User"
 
   has_many :blocks, -> { order(position: :asc) }, dependent: :destroy
+  has_many :block_groups, dependent: :destroy
   has_many :assessments
 
   validates :version_number, presence: true, uniqueness: {scope: :survey_template_id}

@@ -1,28 +1,31 @@
 class Block < ApplicationRecord
   belongs_to :template_version
+  belongs_to :block_group, optional: true
   has_many :block_options, -> { order(position: :asc) }, dependent: :destroy
   # has_many :block_responses, dependent: :destroy
 
   accepts_nested_attributes_for :block_options, allow_destroy: true
 
   validates :block_type, presence: true
-  # validates :question, presence: true
-  validates :position, presence: true, uniqueness: {scope: :workflow_id}
+  validates :question, presence: true
 
-  enum block_type: {
+  enum :block_type, {
     short_text: 0,
     long_text: 1,
     single_select: 2,
     multiple_select: 3,
     number: 4,
     date: 5,
-    lickert: 6
+    likert: 6
   }
+
+  positioned on: :template_version
 
   store_accessor :config, :description, :button_text, :required, :randomize_options,
     :placeholder, :min_length, :max_length, :min_value, :max_value,
     :date_format, :min_date, :max_date
 
+  scope :ungrouped, -> { where(block_group_id: nil) }
   # validates :button_text, presence: true
   # validates :required, inclusion: { in: %w[0 1] }, allow_nil: true
 
@@ -33,7 +36,7 @@ class Block < ApplicationRecord
   end
 
   with_options if: :select_input? do
-    validates :randomize_options, inclusion: {in: [true, false]}
+    validates :randomize_options, inclusion: {in: [true, false, "0", "1"]}
   end
 
   with_options if: :number_input? do
@@ -80,7 +83,7 @@ class Block < ApplicationRecord
       self.max_date ||= Date.today + 1.year
     when "single_select", "multiple_select"
       self.randomize_options = false if randomize_options.nil?
-      block_options.build(key: "Option 1", value: "1") if block_options.empty?
+      block_options.build(key: "Option 1", value: "1", position: 1) if block_options.empty?
     end
   end
 

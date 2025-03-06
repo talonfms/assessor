@@ -18,5 +18,11 @@ application.register('popover', Popover)
 application.register('toggle', Toggle)
 application.register('slideover', Slideover)
 
+// Stimulus Components
+import AutoSubmit from '@stimulus-components/auto-submit'
+import Sortable from '@stimulus-components/sortable'
+application.register('auto-submit', AutoSubmit)
+application.register('sortable', Sortable)
+
 import Flatpickr from 'stimulus-flatpickr'
 application.register('flatpickr', Flatpickr)

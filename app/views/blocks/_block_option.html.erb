@@ -1,0 +1,11 @@
+<li id="<%= dom_id(form.object) %>" class="block mb-2 p-0.5 border border-1 border-gray-400 rounded-sm flex items-center justify-between" data-sortable-update-url="<%= block_option_path(form.object) %>">
+  <div class="flex items-center gap-1">
+    <svg class="handle size-4 cursor-move" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"></path></svg>
+    <%= form.text_field :key, class: "border-none focus:border focus:border-gray-300 focus:ring-1 focus:ring-gray-300 rounded px-1 text-sm", data: { action: "auto-submit#submit" } %>
+  </div>
+  <%= link_to block_option_path(form.object), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "text-red-600 hover:text-red-800" do %>
+    <svg class="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+    </svg>
+  <% end %>
+</li>
