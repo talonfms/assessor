@@ -84,8 +84,9 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+
+staging:
+  <<: *default
+
 production:
   <<: *default
-  database: assessor_production
-  username: jumpstart
-  password: <%= ENV['POSTGRES_PASSWORD'] %>
