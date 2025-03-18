@@ -74,7 +74,7 @@ group :test do
 end
 
 # Use Redis adapter to run Action Cable in production
-# gem "redis", "~> 5.1"
+gem "redis", "~> 5.1"
 
 # Jumpstart Pro dependencies
 require_relative "lib/jumpstart/lib/jumpstart/configuration"
