@@ -420,11 +420,6 @@ GEM
       rack (>= 2.2.4)
       redis-client (>= 0.22.2)
     smart_properties (1.17.0)
-    solid_cable (3.0.2)
-      actioncable (>= 7.2)
-      activejob (>= 7.2)
-      activerecord (>= 7.2)
-      railties (>= 7.2)
     solid_cache (1.0.6)
       activejob (>= 7.2)
       activerecord (>= 7.2)
@@ -540,7 +535,6 @@ DEPENDENCIES
   ruby-oembed (~> 0.18.0)
   selenium-webdriver (>= 4.20.1)
   sidekiq
-  solid_cable
   solid_cache
   solid_queue
   stimulus-rails (~> 1.0, >= 1.0.2)
