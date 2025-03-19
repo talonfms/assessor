@@ -2,6 +2,7 @@ require "test_helper"
 
 class SurveyTemplatesControllerTest < ActionDispatch::IntegrationTest
   setup do
+    sign_in users(:one)
     @survey_template = survey_templates(:one)
   end
 
@@ -17,7 +18,7 @@ class SurveyTemplatesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create survey_template" do
     assert_difference("SurveyTemplate.count") do
-      post survey_templates_url, params: { survey_template: { account_id: @survey_template.account_id, description: @survey_template.description, name: @survey_template.name } }
+      post survey_templates_url, params: {survey_template: {account_id: @survey_template.account_id, description: @survey_template.description, name: @survey_template.name}}
     end
 
     assert_redirected_to survey_template_url(SurveyTemplate.last)
@@ -34,7 +35,7 @@ class SurveyTemplatesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update survey_template" do
-    patch survey_template_url(@survey_template), params: { survey_template: { account_id: @survey_template.account_id, description: @survey_template.description, name: @survey_template.name } }
+    patch survey_template_url(@survey_template), params: {survey_template: {account_id: @survey_template.account_id, description: @survey_template.description, name: @survey_template.name}}
     assert_redirected_to survey_template_url(@survey_template)
   end
 

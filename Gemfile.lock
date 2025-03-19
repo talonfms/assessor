@@ -155,6 +155,7 @@ GEM
     childprocess (5.1.0)
       logger (~> 1.5)
     chunky_png (1.4.0)
+    coderay (1.1.3)
     concurrent-ruby (1.3.4)
     connection_pool (2.4.1)
     crack (1.0.0)
@@ -300,6 +301,11 @@ GEM
       activesupport (>= 7.0.0)
       rack
       railties (>= 7.0.0)
+    pry (0.15.2)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
+    pry-rails (0.3.11)
+      pry (>= 0.13.0)
     psych (5.2.0)
       stringio
     public_suffix (6.0.1)
@@ -507,6 +513,8 @@ DEPENDENCIES
   prefixed_ids (~> 1.2)
   pretender (~> 0.4)
   propshaft (~> 1.0)
+  pry
+  pry-rails
   puma (~> 6.0)
   pundit (~> 2.1)
   rails (~> 8.0.0)
