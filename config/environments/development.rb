@@ -83,5 +83,5 @@ Rails.application.configure do
 
   # Use matching queue adapter as production
   config.active_job.queue_adapter = Jumpstart.config.queue_adapter if Jumpstart.config.queue_adapter
-  config.solid_queue.connects_to = {database: {writing: :queue}}
+  # config.solid_queue.connects_to = {database: {writing: :queue}}
 end

@@ -1,8 +1,8 @@
 class Block < ApplicationRecord
   belongs_to :template_version
+  has_many :responses, dependent: :destroy
   belongs_to :block_group, optional: true
   has_many :block_options, -> { order(position: :asc) }, dependent: :destroy
-  # has_many :block_responses, dependent: :destroy
 
   accepts_nested_attributes_for :block_options, allow_destroy: true
 
