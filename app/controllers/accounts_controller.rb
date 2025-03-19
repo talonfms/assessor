@@ -1,5 +1,6 @@
 class AccountsController < Accounts::BaseController
   before_action :authenticate_user!
+  before_action :check_admin
   before_action :set_account, only: [:show, :edit, :update, :destroy, :switch]
   before_action :require_account_admin, only: [:edit, :update, :destroy]
   before_action :prevent_personal_account_deletion, only: [:destroy]
@@ -84,6 +85,12 @@ class AccountsController < Accounts::BaseController
   end
 
   private
+
+  def check_admin
+    return true if Current.account_user&.admin?
+
+    redirect_to assessments_path
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_account

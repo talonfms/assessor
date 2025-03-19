@@ -2,7 +2,9 @@ require "test_helper"
 
 class SurveyTemplatesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users(:one)
+    @user = users(:one)
+    @account = accounts(:one)
+    sign_in_as_admin(@user, @account)
     @survey_template = survey_templates(:one)
   end
 
