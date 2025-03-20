@@ -41,22 +41,26 @@
             <div class="flex justify-between items-center mb-4">
               <div>
                 <p class="text-sm font-medium text-gray-500">Progress</p>
-                <p class=" flex items-center">
-                  <% if assessment.sow_check.complete? %>
-                    <%= heroicon :check_circle %>
-                  <% else %>
-                    <%= heroicon :empty_circle %>
-                  <% end %>
-                  <span class="ml-2">Statement of Work (SOW) Documents</span>
-                </p>
-                <p class=" flex items-center">
-                  <% if assessment.finance_check.complete? %>
-                    <%= heroicon :check_circle %>
-                  <% else %>
-                    <%= heroicon :empty_circle %>
-                  <% end %>
-                  <span class="ml-2">Accounts Payable Extract</span>
-                </p>
+                <% if assessment.sow_check %>
+                  <p class=" flex items-center">
+                    <% if assessment.sow_check&.complete? %>
+                      <%= heroicon :check_circle %>
+                    <% else %>
+                      <%= heroicon :empty_circle %>
+                    <% end %>
+                    <span class="ml-2">Statement of Work (SOW) Documents</span>
+                  </p>
+                <% end %>
+                <% if assessment.finance_check %>
+                  <p class=" flex items-center">
+                    <% if assessment.finance_check&.complete? %>
+                      <%= heroicon :check_circle %>
+                    <% else %>
+                      <%= heroicon :empty_circle %>
+                    <% end %>
+                    <span class="ml-2">Accounts Payable Extract</span>
+                  </p>
+                <% end %>
                 <p class=" flex items-center">
                   <%= heroicon :empty_circle %>
                   <span class="ml-2">Survey</span>
@@ -82,9 +86,9 @@
               </div>
             </div>
           </div>
-          <%#= render assessment.template_version, assessment: assessment %>
-          <%= render assessment.sow_check%>
-          <%= render assessment.finance_check%>
+          <%= render assessment.template_version, assessment: assessment %>
+          <%= render assessment.sow_check if assessment.sow_check %>
+          <%= render assessment.finance_check if assessment.finance_check %>
         </div>
       </div>
     </div>

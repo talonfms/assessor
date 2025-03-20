@@ -2,7 +2,7 @@ require "test_helper"
 
 class AssessmentsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    sign_in users(:one)
+    sign_in_as_admin(users(:one), accounts(:one))
     @assessment = assessments(:one)
   end
 
@@ -16,13 +16,13 @@ class AssessmentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  # test "should create assessment" do
-  #   assert_difference("Assessment.count") do
-  #     post assessments_url, params: {assessment: {account_id: @assessment.account_id, name: @assessment.name}}
-  #   end
+  test "should create assessment" do
+    assert_difference("Assessment.count") do
+      post assessments_url, params: {assessment: {account_id: @assessment.account_id, name: @assessment.name, template_version_id: @assessment.template_version.id}}
+    end
 
-  #   assert_redirected_to assessment_url(Assessment.last)
-  # end
+    assert_redirected_to assessment_url(Assessment.last)
+  end
 
   test "should show assessment" do
     get assessment_url(@assessment)
@@ -34,10 +34,10 @@ class AssessmentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  # test "should update assessment" do
-  #   patch assessment_url(@assessment), params: {assessment: {account_id: @assessment.account_id, name: @assessment.name}}
-  #   assert_redirected_to assessment_url(@assessment)
-  # end
+  test "should update assessment" do
+    patch assessment_url(@assessment), params: {assessment: {name: @assessment.name}}
+    assert_redirected_to assessment_url(@assessment)
+  end
 
   test "should destroy assessment" do
     assert_difference("Assessment.count", -1) do

@@ -3,7 +3,11 @@
 one:
   name: MyString
   account: one
+  template_version: one
+  token: MyString
 
 two:
   name: MyString
   account: two
+  template_version: two
+  token: MyString

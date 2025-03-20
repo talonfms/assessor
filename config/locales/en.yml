@@ -196,6 +196,12 @@ en:
     show:
       title: "Assessments"
 
+  assessments:
+    new:
+      name: "Name"
+      survey_template_version: "Survey Template Version"
+      default_name: "Services Health Check"
+
   oauth:
     sign_in_with: "Sign in with %{provider}"
     apple: "Apple"

@@ -4,7 +4,7 @@ class TemplateVersion < ApplicationRecord
 
   has_many :blocks, -> { order(position: :asc) }, dependent: :destroy
   has_many :block_groups, dependent: :destroy
-  has_many :assessments
+  has_many :assessments, dependent: :destroy
 
   validates :version_number, presence: true, uniqueness: {scope: :survey_template_id}
   validates :survey_template, presence: true
