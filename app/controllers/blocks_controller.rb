@@ -20,8 +20,6 @@ class BlocksController < ApplicationController
     else
       current_block_group.present? ? current_block_group.blocks.maximum(:position).to_i + 1 : @template_version.blocks.ungrouped.maximum(:position).to_i + 1
     end
-    p current_block
-    p next_position
     @block = @template_version.blocks.new(block_params.merge(position: next_position, required: "0", button_text: "Next",
       question: "How are you doing?", block_group_id: current_block_group&.id))
     @block.apply_default_options

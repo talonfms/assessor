@@ -10,6 +10,7 @@
         <%= form.label :description %>
         <%= form.text_area :description, class: 'form-control', data: { action: 'auto-submit#submit' } %>
       </div>
+      <!--
       <div class="form-group">
         <%= form.label :block_group_id, "Block Group" %>
         <div class="input-group">
@@ -24,13 +25,16 @@
           </button>
         </div>
       </div>
+      -->
       <div id="block-type-specific-fields">
         <%= render "blocks/edit_#{block.block_type}", form: form, block: block %>
       </div>
+      <!--
       <div class="form-group">
         <%= form.label :button_text %>
         <%= form.text_field :button_text, class: 'form-control', data: { action: 'auto-submit#submit' }  %>
       </div>
+      -->
       <div class="checkbox">
         <label>
           <%= form.check_box :required, data: { action: 'auto-submit#submit' }  %> Required
