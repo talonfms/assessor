@@ -5,7 +5,15 @@ class SowCheck < ApplicationRecord
 
   acts_as_tenant :account
 
+  DEFAULT_TARGET_FILES = 10
+
+  before_create :set_defaults
+
   def complete?
-    files.count >= target_files
+    files.count >= (target_files || DEFAULT_TARGET_FILES)
+  end
+
+  def set_defaults
+    self.target_files = DEFAULT_TARGET_FILES
   end
 end

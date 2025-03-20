@@ -9,6 +9,8 @@ class Assessment < ApplicationRecord
   has_one :finance_check, dependent: :destroy
   has_many :survey_responses, dependent: :destroy
 
+  validates :name, presence: true
+
   enum :status, %w[in_progress submitted completed].index_by(&:itself)
   translate_enum :status
 

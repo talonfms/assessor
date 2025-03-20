@@ -1,26 +1,37 @@
 <%= form_with(model: assessment) do |form| %>
   <%= render "error_messages", resource: form.object %>
   <div class="form-group">
-    <%= form.label :name %>
-    <%= form.text_field :name, class: "form-control", value: form.object.name || "Services Health Check" %>
+    <%= form.label :name do %>
+      <%= I18n.t('assessments.new.name') %> <span style="color: red;">*</span>
+    <% end %>
+    <%= form.text_field :name, class: "form-control", value: form.object.name || I18n.t('assessments.new.default_name') %>
   </div>
   <% unless assessment.persisted? %>
     <div class="form-group">
       <%= form.label "Included Checks" %>
       <div class="form-picker-group">
-        <%= form.check_box :include_sow_check, checked: true%>
+        <%= form.check_box :include_sow_check, checked: true %>
         <%= form.label :include_sow_check, "Statement of Work (SOW) Documents"%>
       </div>
       <div class="form-picker-group">
-        <%= form.check_box :include_finance_check, checked: true%>
+        <%= form.check_box :include_finance_check, checked: true %>
         <%= form.label :include_finance_check, "Accounts Payable Extract"%>
       </div>
-      <div class="form-picker-group">
-        <input type="checkbox" id="checkbox-3" checked>
-        <label for="checkbox-3">Engagement Manager Survey</label>
-      </div>
     </div>
-  <% end%>
+    <div class="form-group">
+      <%= form.label :template_version_id do %> 
+        <%= I18n.t('assessments.new.survey_template_version') %> <span style="color: red;">*</span>
+      <% end %>
+        <div class="input-group">
+          <%= form.collection_select :template_version_id, 
+          TemplateVersion.all, 
+          :id, 
+          ->template_version { "#{template_version.survey_template.name} - #{template_version.notes}" },
+          { class: "form-control", data: { action: "auto-submit#submit" } } %>
+        </div>
+    </div>
+
+  <% end %>
   <div>
     <%= form.button button_text(form.send(:submit_default_value)), class: "btn btn-primary" %>
     <% if form.object.new_record? %>
