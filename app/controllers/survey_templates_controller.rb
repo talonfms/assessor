@@ -1,5 +1,6 @@
 class SurveyTemplatesController < ApplicationController
   before_action :set_survey_template, only: [:show, :edit, :update, :destroy]
+  before_action :check_admin
 
   # GET /survey_templates
   def index
@@ -81,6 +82,12 @@ class SurveyTemplatesController < ApplicationController
   end
 
   private
+
+  def check_admin
+    return true if Current.account_user&.admin?
+
+    redirect_to assessments_path
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_survey_template

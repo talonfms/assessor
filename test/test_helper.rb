@@ -16,6 +16,21 @@ if defined?(SolidQueue)
   SolidQueue.logger.level = Logger::WARN
 end
 
+def sign_in_as_admin(user, account)
+  account_user = AccountUser.find_or_create_by(user: user, account: account)
+  account_user.update(roles: {"admin" => true})
+  Current.account = account
+  sign_in user
+end
+
+def sign_in_as_member(user, account)
+  account_user = AccountUser.find_or_create_by(user: user, account: account)
+  account_user.update!(roles: {"member" => true, "admin" => false})
+  Current.account = account
+  Current.user = user
+  sign_in user
+end
+
 module ActiveSupport
   class TestCase
     # Run tests in parallel with specified workers
