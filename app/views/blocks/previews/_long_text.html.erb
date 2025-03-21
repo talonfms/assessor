@@ -3,7 +3,9 @@
   <% if block.description.present? %>
     <p class="mt-1 text-sm leading-6 text-gray-600"><%= block.description %></p>
   <% end %>
-  <%= form.text_area :response_data, class: 'form-control', placeholder: block.placeholder,
+  <%= form.text_area :response_data,
+                      name: "survey_response[responses_attributes][][response_data][text]", 
+                      class: 'form-control', placeholder: block.placeholder,
                       rows: 4,
                       required: block.required? %>
 </div>
