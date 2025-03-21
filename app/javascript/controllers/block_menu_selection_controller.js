@@ -10,7 +10,6 @@ export default class extends Controller {
 
   connect() {
     // Show default content if specified
-    console.log("HELLO")
     if (this.defaultBlockValue) {
       this.showContent(this.defaultBlockValue)
     } else {

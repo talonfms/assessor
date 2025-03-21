@@ -1,9 +1,9 @@
-<h4>No group</h4>
+<%# <h4>No group</h4> %>
 <div id="blocks-list-" class="w-full max-w-2xl" data-controller="sortable" data-sortable-response-kind-value="turbo_stream" data-sortable-handle-value=".handle" data-sortable-resource-name-value="block">
   <%= render partial: 'blocks/block', collection: template_version.blocks.ungrouped %>
 </div>
 <% template_version.block_groups.each do | block_group | %>
-  <h4><%= block_group.name %></h4>
+  <%# <h4><%#= block_group.name %>
   <div id="blocks-list-<%= block_group.id %>" class="w-full max-w-2xl" data-controller="sortable" data-sortable-response-kind-value="turbo_stream" data-sortable-handle-value=".handle" data-sortable-resource-name-value="block">
     <%= render partial: 'blocks/block', collection: block_group.blocks %>
   </div>

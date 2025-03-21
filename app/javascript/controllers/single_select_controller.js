@@ -3,9 +3,6 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["input", "button"]
 
-  connect(){
-    console.log("Hello from single select controller")
-  }
   select(event) {
     // Remove active class from all buttons
     this.buttonTargets.forEach(button => 
