@@ -3,13 +3,20 @@
 one:
   template_version: one
   block_type: 1
-  question: MyString
+  question: Some Question
   position: 1
-  config: 
+  config:
 
 two:
   template_version: two
   block_type: 1
-  question: MyString
+  question: Another Question
   position: 1
-  config: 
+  config:
+
+three:
+  template_version: two
+  block_type: 1
+  question: Alternative Question
+  position: 1
+  config:

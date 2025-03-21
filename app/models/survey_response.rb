@@ -1,5 +1,6 @@
 class SurveyResponse < ApplicationRecord
   belongs_to :assessment
+  belongs_to :respondent, class_name: "User", optional: true
 
   has_many :responses, dependent: :destroy
 

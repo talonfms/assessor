@@ -2,7 +2,7 @@ class TemplateVersion < ApplicationRecord
   belongs_to :survey_template
   belongs_to :created_by, class_name: "User"
 
-  has_many :blocks, -> { order(position: :asc) }, dependent: :destroy
+  has_many :blocks, -> { order(position: :asc).conditionally_exclude_email_and_full_name }, dependent: :destroy
   has_many :block_groups, dependent: :destroy
   has_many :assessments, dependent: :destroy
 

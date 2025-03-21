@@ -25,6 +25,14 @@ class Block < ApplicationRecord
     :placeholder, :min_length, :max_length, :min_value, :max_value,
     :date_format, :min_date, :max_date
 
+  scope :conditionally_exclude_email_and_full_name, -> {
+    if Current.user.present?
+      where.not(question: ["Email:", "Full Name:"])
+    else
+      all
+    end
+  }
+
   scope :ungrouped, -> { where(block_group_id: nil) }
   # validates :button_text, presence: true
   # validates :required, inclusion: { in: %w[0 1] }, allow_nil: true

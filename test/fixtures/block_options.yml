@@ -1,13 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   block: one
-  key: MyString
+  key: Option 1
   value: MyString
   position: 1
 
 two:
+  id: 2
   block: two
-  key: MyString
+  key: Option 2
   value: MyString
   position: 1

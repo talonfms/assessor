@@ -3,9 +3,14 @@
 one:
   block: one
   survey_response: one
-  response_data: 
+  response_data: { text: "My name is Sean Paul" }
 
 two:
   block: two
   survey_response: two
-  response_data: 
+  response_data: { block_option_id: 2 }
+
+three:
+  block: three
+  survey_response: one
+  response_data: { block_option_id: 1 }

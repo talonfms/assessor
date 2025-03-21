@@ -2,10 +2,12 @@
 
 one:
   assessment: one
-  respondent_email: MyString
+  respondent_email: one@example.com
   completed_at: 2024-11-25 14:05:36
+  respondent: one
 
 two:
   assessment: two
-  respondent_email: MyString
+  respondent_email: user-two@email.com
   completed_at: 2024-11-25 14:05:36
+  respondent: two
