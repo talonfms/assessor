@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_30_135941) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_26_094407) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -176,6 +176,15 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_30_135941) do
     t.string "access_token_secret"
     t.string "owner_type"
     t.index ["owner_id", "owner_type"], name: "index_connected_accounts_on_owner_id_and_owner_type"
+  end
+
+  create_table "export_bundles", force: :cascade do |t|
+    t.bigint "assessment_id", null: false
+    t.integer "status", default: 0
+    t.text "error_message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assessment_id"], name: "index_export_bundles_on_assessment_id"
   end
 
   create_table "finance_checks", force: :cascade do |t|
@@ -474,6 +483,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_30_135941) do
   add_foreign_key "block_options", "blocks"
   add_foreign_key "blocks", "block_groups"
   add_foreign_key "blocks", "template_versions"
+  add_foreign_key "export_bundles", "assessments"
   add_foreign_key "finance_checks", "accounts"
   add_foreign_key "finance_checks", "assessments"
   add_foreign_key "pay_charges", "pay_customers", column: "customer_id"

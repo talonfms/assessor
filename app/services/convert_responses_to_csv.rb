@@ -2,7 +2,6 @@ require "csv"
 
 class ConvertResponsesToCsv
   def initialize(assessment)
-    # eager load the survey_responses, responses and blocks into the assessment when this is called from the controller
     @assessment = assessment
   end
 
@@ -40,11 +39,13 @@ class ConvertResponsesToCsv
   end
 
   def extract_answer_from_response_data(response_data)
-    case response_data.keys.first
+    case response_data&.keys&.first
     when "text"
       response_data["text"]
     when "block_option_id"
       BlockOption.find(response_data["block_option_id"]).key
+    when nil
+      ""
     end
   end
 

@@ -239,6 +239,8 @@ GEM
     mini_magick (4.13.2)
     mini_mime (1.1.5)
     minitest (5.25.1)
+    mocha (2.7.1)
+      ruby2_keywords (>= 0.0.5)
     msgpack (1.7.5)
     name_of_person (1.1.3)
       activesupport (>= 5.2.0)
@@ -406,6 +408,7 @@ GEM
     ruby-vips (2.2.2)
       ffi (~> 1.12)
       logger
+    ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
     securerandom (0.3.2)
     selenium-webdriver (4.26.0)
@@ -502,6 +505,7 @@ DEPENDENCIES
   local_time (~> 3.0)
   madmin!
   mailbin!
+  mocha
   name_of_person (~> 1.0)
   nokogiri (>= 1.12.5)
   noticed (~> 2.2)
@@ -524,6 +528,7 @@ DEPENDENCIES
   rqrcode (~> 2.1)
   rubocop-rails-omakase
   ruby-oembed (~> 0.18.0)
+  rubyzip (~> 2.3)
   selenium-webdriver (>= 4.20.1)
   sidekiq
   stimulus-rails (~> 1.0, >= 1.0.2)

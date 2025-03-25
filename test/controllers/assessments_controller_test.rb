@@ -34,9 +34,20 @@ class AssessmentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should update assessment" do
+  test "should update assessment without creating an ExportBundle" do
+    ExportBundle.destroy_all
     patch assessment_url(@assessment), params: {assessment: {name: @assessment.name}}
     assert_redirected_to assessment_url(@assessment)
+    assert_nil ExportBundle.find_by(assessment: @assessment)
+  end
+
+  test "should update assessment to submitted and create ExportBundle" do
+    ExportBundle.destroy_all
+    patch assessment_url(@assessment), params: {assessment: {name: @assessment.name, status: "submitted"}}
+    assert_redirected_to assessment_url(@assessment)
+    assert_not_nil ExportBundle.find_by(assessment: @assessment)
+    assert_equal 1, ExportBundleWorker.jobs.size
+    assert_equal @assessment.id, ExportBundleWorker.jobs.first["args"].first
   end
 
   test "should destroy assessment" do

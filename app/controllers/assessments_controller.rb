@@ -1,5 +1,5 @@
 class AssessmentsController < ApplicationController
-  before_action :set_assessment, only: [:show, :edit, :update, :destroy]
+  before_action :set_assessment, only: [:show, :edit, :update, :destroy, :download_bundle]
 
   # GET /assessments
   def index
@@ -59,6 +59,10 @@ class AssessmentsController < ApplicationController
         format.json { render json: @assessment.errors, status: :unprocessable_entity }
       end
     end
+    if @assessment.submitted?
+      ExportBundle.find_or_create_by(assessment: @assessment)
+      ExportBundleWorker.perform_async(@assessment.id)
+    end
   end
 
   # DELETE /assessments/1 or /assessments/1.json
@@ -70,10 +74,15 @@ class AssessmentsController < ApplicationController
     end
   end
 
-  # def export_responses
-  #   csv_data = ConvertResponsesToCsv.new(@assessment).export_responses_to_csv
-  #   send_data csv_data, filename: "responses.csv", type: "text/csv"
-  # end
+  def download_bundle
+    return unless @assessment.submitted? && @assessment.export_bundle&.completed?
+
+    if @assessment.export_bundle.file.attached?
+      redirect_to rails_blob_path(@assessment.export_bundle.file, disposition: "attachment")
+    else
+      redirect_to assessment_path(@assessment), alert: I18n.t("assessments.download_bundle.no_file")
+    end
+  end
 
   private
 

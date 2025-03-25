@@ -7,7 +7,12 @@
       <span class="text-gray-400 font-light mx-2">\</span>
       <%= @assessment.name %>
     </h1>
+    <div>
+    <% if Current.account_user&.admin? && @assessment.submitted? && @assessment.export_bundle&.completed? %>
+      <%= link_to I18n.t('assessments.preview.download'), download_bundle_assessment_path(@assessment), method: :get, class: "btn btn-secondary" %>
+    <% end %>
     <%= link_to t("edit"), edit_assessment_path(@assessment), class: "btn btn-secondary" %>
+    </div>
   </div>
   <div>
     <%= render @assessment %>

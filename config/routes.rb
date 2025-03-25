@@ -51,7 +51,11 @@ Rails.application.routes.draw do
       resources :block_groups, only: [:create]
     end
     resources :block_options, only: %i[create new update destroy]
-    resources :assessments
+    resources :assessments do
+      member do
+        get "download_bundle"
+      end
+    end
     resources :finance_checks, only: [:update]
     resources :sow_checks, only: [:update]
 
