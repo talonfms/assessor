@@ -70,6 +70,11 @@ class AssessmentsController < ApplicationController
     end
   end
 
+  # def export_responses
+  #   csv_data = ConvertResponsesToCsv.new(@assessment).export_responses_to_csv
+  #   send_data csv_data, filename: "responses.csv", type: "text/csv"
+  # end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

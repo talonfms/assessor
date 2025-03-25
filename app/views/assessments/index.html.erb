@@ -17,10 +17,10 @@
   <%= tag.div id: ("assessments" if first_page?), class: "bg-white dark:bg-gray-900 dark:border dark:border-gray-700 rounded-md shadow p-6 space-y-8" do %>
     <%= render partial: "assessments/assessment_preview", collection: @assessments, as: :assessment, cached: true %>
     <% if Current.account_user&.admin? %>
-    <div class="hidden only:block text-center">
-      <p class="mb-4 h3">Create your first Assessment</p>
-      <%= link_to t("scaffold.new.title", model: "Assessment"), new_assessment_path, class: "btn btn-primary" %>
-    </div>
+      <div class="hidden only:block text-center">
+        <p class="mb-4 h3">Create your first Assessment</p>
+        <%= link_to t("scaffold.new.title", model: "Assessment"), new_assessment_path, class: "btn btn-primary" %>
+      </div>
     <% end %>
   <% end %>
   <% if @pagy.pages > 1 %>

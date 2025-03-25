@@ -201,7 +201,9 @@ en:
       name: "Name"
       survey_template_version: "Survey Template Version"
       default_name: "Services Health Check"
-
+    preview:
+      view: "View this assessment"
+      download: "Download submissions"
   oauth:
     sign_in_with: "Sign in with %{provider}"
     apple: "Apple"
