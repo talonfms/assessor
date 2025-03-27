@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  name: Assessment One
   account: one
   template_version: one
   token: MyString
 
 two:
-  name: MyString
+  name: Assessment Two
   account: two
   template_version: two
   token: MyString

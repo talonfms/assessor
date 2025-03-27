@@ -3,9 +3,13 @@ require_relative "../config/environment"
 require "rails/test_help"
 require "minitest/mock"
 require "webmock/minitest"
+require "sidekiq/testing"
+require "mocha/minitest"
 
 # Uncomment to view full stack trace in tests
 # Rails.backtrace_cleaner.remove_silencers!
+
+Sidekiq::Testing.fake!
 
 if defined?(Sidekiq)
   require "sidekiq/testing"

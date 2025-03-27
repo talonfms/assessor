@@ -204,6 +204,10 @@ en:
     preview:
       view: "View this assessment"
       download: "Download submissions"
+    download_bundle:
+      no_file: "No file available for download."
+  export_bundles:
+    error_message: "Failed to attach zip file"
   oauth:
     sign_in_with: "Sign in with %{provider}"
     apple: "Apple"
