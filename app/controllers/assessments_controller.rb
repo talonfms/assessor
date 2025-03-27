@@ -60,7 +60,7 @@ class AssessmentsController < ApplicationController
       end
     end
     if @assessment.submitted?
-      ExportBundle.find_or_create_by(assessment: @assessment)
+      ExportBundle.find_or_create_by(assessment_id: @assessment.id)
       ExportBundleWorker.perform_async(@assessment.id)
     end
   end
