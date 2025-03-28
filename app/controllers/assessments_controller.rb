@@ -50,18 +50,34 @@ class AssessmentsController < ApplicationController
 
   # PATCH/PUT /assessments/1 or /assessments/1.json
   def update
+    if assessment_params[:remove_file] == "true" && @assessment.file.attached?
+      @assessment.file.purge
+      @assessment.update!(status: "submitted")
+
+      respond_to do |format|
+        format.html { redirect_to @assessment, notice: "File was successfully removed." }
+        format.json { render :show, status: :ok, location: @assessment }
+      end
+      return
+    end
+
     respond_to do |format|
       if @assessment.update(assessment_params)
+        if @assessment.file.attached?
+          @assessment.update!(status: "completed")
+        end
+
+        if @assessment.submitted?
+          ExportBundle.find_or_create_by(assessment_id: @assessment.id)
+          ExportBundleWorker.perform_async(@assessment.id)
+        end
+
         format.html { redirect_to @assessment, notice: "Assessment was successfully updated." }
         format.json { render :show, status: :ok, location: @assessment }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @assessment.errors, status: :unprocessable_entity }
       end
-    end
-    if @assessment.submitted?
-      ExportBundle.find_or_create_by(assessment_id: @assessment.id)
-      ExportBundleWorker.perform_async(@assessment.id)
     end
   end
 
@@ -98,7 +114,7 @@ class AssessmentsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def assessment_params
-    params.require(:assessment).permit(:name, :include_sow_check, :include_finance_check, :status, :template_version_id)
+    params.require(:assessment).permit(:name, :include_sow_check, :include_finance_check, :status, :template_version_id, :file, :remove_file)
 
     # Uncomment to use Pundit permitted attributes
     # params.require(:assessment).permit(policy(@assessment).permitted_attributes)

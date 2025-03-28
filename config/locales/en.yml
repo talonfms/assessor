@@ -31,6 +31,7 @@ en:
   are_you_sure: "Are you sure?"
   back: "Back"
   cancel: "Cancel"
+  close: "Close"
   create_an_account_first: "Please create an account first."
   delete: "Delete"
   edit: "Edit"
@@ -201,11 +202,20 @@ en:
       name: "Name"
       survey_template_version: "Survey Template Version"
       default_name: "Services Health Check"
+    show:
+      assessment_input: "Assessment Input"
+      analysis: "Analysis"
+      no_files: "No files uploaded yet"
+      delete_file: "Are you sure you want to delete this file?"
+      upload_analysis_file: "Upload Analysis File"
     preview:
       view: "View this assessment"
       download: "Download submissions"
     download_bundle:
       no_file: "No file available for download."
+    analysis:
+      not_available: "Analysis is only available for completed assessments."
+      underway: "Analysis is underway. You will be notified when your results are ready."
   export_bundles:
     error_message: "Failed to attach zip file"
   oauth:

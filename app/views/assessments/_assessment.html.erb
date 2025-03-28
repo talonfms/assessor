@@ -10,12 +10,12 @@
       <a href="#"
           data-tabs-target="tab"
           data-action="click->tabs#change:prevent">
-        Assessment Input
+        <%= I18n.t('assessments.show.assessment_input') %>
       </a>
       <a href="#"
           data-tabs-target="tab"
           data-action="click->tabs#change:prevent">
-        Analysis
+        <%= I18n.t('assessments.show.analysis') %>
       </a>
     </nav>
     <div class="hidden" data-tabs-target="panel">
@@ -92,15 +92,83 @@
         </div>
       </div>
     </div>
+    <!-- Analysis Tab -->
     <div class="hidden" data-tabs-target="panel">
       <% if assessment.in_progress? %>
         <p>
-          Analysis is only available for completed assessments.
+          <em><%= I18n.t('assessments.analysis.not_available') %></em>
         </p>
-      <% elsif assessment.submitted? %>
-        <p>
-          Analysis is underway. You will be notified when your results are ready.
+      <% elsif assessment.submitted? || assessment.completed? %>
+        <% if Current.account_user.admin? %>
+          <div class="relative overflow-x-auto">
+            <table class="w-full text-sm text-left text-gray-500">
+              <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                <tr>
+                  <th scope="col" class="px-6 py-3">File Name</th>
+                  <th scope="col" class="px-6 py-3">Size</th>
+                  <th scope="col" class="px-6 py-3">Upload Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if assessment.file.attached? %>
+                  <tr class="bg-white border-b">
+                    <td class="px-6 py-4"><%= assessment.file.filename %></td>
+                    <td class="px-6 py-4"><%= number_to_human_size(assessment.file.byte_size) %></td>
+                    <td class="px-6 py-4"><%= l assessment.file.created_at, format: :long %></td>
+                      <td class="px-6 py-4">
+                        <%= button_to assessment, 
+                            params: { assessment: { remove_file: true } },
+                            method: :patch,
+                            form: { data: { turbo_confirm: I18n.t('assessments.show.delete_file') } },
+                            class: "text-red-600 hover:text-red-900" do %>
+                          <%= heroicon :trash %>
+                        <% end %>
+                      </td>
+                  </tr>
+                <% else %>
+                  <tr class="bg-white border-b">
+                    <td colspan="4" class="px-6 py-4 text-center text-gray-500">
+                      <%= I18n.t('assessments.show.no_files') %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+           <div data-controller="modal">
+            <button class="btn btn-secondary my-4" data-action="click->modal#open:prevent"><%= I18n.t('assessments.show.upload_analysis_file') %></button>
+            <dialog class="modal modal-lg" data-modal-target="dialog" data-action="click-&gt;modal#backdropClose">
+              <%= form_with(model: assessment, id: dom_id(assessment), local: false) do |form| %>
+                <%= form.hidden_field :file, value: assessment.file.signed_id %>
+                <div class="modal-card">
+                  <button type="button" data-action="modal#close:prevent">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
+                      <line x1="18" x2="6" y1="6" y2="18"></line>
+                      <line x1="6" x2="18" y1="6" y2="18"></line>
+                    </svg>
+                    <span class="sr-only"><%= I18n.t('close') %></span>
+                  </button>
+                  <div>
+                    <h2 class="modal-title"><%= I18n.t('assessments.show.upload_analysis_file') %></h2>
+                    <div class="modal-body">
+                      <div class="form-group">
+                        <%= form.file_field :file, direct_upload: true, class: "file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-50 file:text-gray-700 hover:file:bg-gray-100" %>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <button class="btn btn-secondary" data-action="click->modal#close:prevent"><%= I18n.t('cancel') %></button>
+                    <%= form.submit "Continue", class: "btn btn-primary"%>
+                  </div>
+                </div>
+              <% end %>
+            </dialog>
+          </div>
+        <% else %>
+         <p>
+          <em><%= I18n.t('assessments.analysis.underway') %></em>
         </p>
+        <% end %>
       <% end %>
     </div>
   </div>

@@ -9,6 +9,7 @@ class Assessment < ApplicationRecord
   has_one :finance_check, dependent: :destroy
   has_many :survey_responses, dependent: :destroy
   has_one :export_bundle, dependent: :destroy
+  has_one_attached :file
 
   validates :name, presence: true
 
