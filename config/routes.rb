@@ -39,6 +39,10 @@ Rails.application.routes.draw do
   match "/404", via: :all, to: "errors#not_found"
   match "/500", via: :all, to: "errors#internal_server_error"
 
+  authenticate :user, ->(u) { u.admin? } do
+    mount Sidekiq::Web => "/sidekiq"
+  end
+
   authenticated :user do
     root to: "dashboard#show", as: :user_root
     resources :survey_templates
