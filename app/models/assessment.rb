@@ -22,4 +22,8 @@ class Assessment < ApplicationRecord
   def submittable?
     in_progress? && sow_check&.complete? && finance_check&.complete?
   end
+
+  def files
+    []
+  end
 end

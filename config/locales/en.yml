@@ -206,6 +206,9 @@ en:
       download: "Download submissions"
     download_bundle:
       no_file: "No file available for download."
+    analysis:
+      not_available: "Analysis is only available for completed assessments."
+      underway: "Analysis is underway. You will be notified when your results are ready."
   export_bundles:
     error_message: "Failed to attach zip file"
   oauth:
