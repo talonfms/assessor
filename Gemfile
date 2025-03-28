@@ -85,3 +85,7 @@ group :development, :test do
   gem "pry"
   gem "pry-rails"  # Adds some nice Rails-specific features to pry
 end
+
+gem "aws-sdk-s3", "~> 1.182"
+
+gem "dotenv-rails", "~> 3.1"
