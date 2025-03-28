@@ -16,7 +16,7 @@ class ExportBundleWorker
     zip_path = "#{temp_dir}/export_bundle_#{Time.now.to_i}.zip"
 
     begin
-      csv_content = generate_csv(assessment)
+      csv_content = generate_csv(assessment) if assessment.survey_responses.present?
       csv_path = "#{temp_dir}/responses_export.csv"
       File.write(csv_path, csv_content)
 
