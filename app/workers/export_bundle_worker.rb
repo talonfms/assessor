@@ -56,8 +56,8 @@ class ExportBundleWorker
   def collect_attachments_into_dir(assessment, temp_dir)
     file_paths = []
     attachments = []
-    attachments << assessment.sow_check.files.all if assessment.sow_check.present?
-    attachments << assessment.finance_check.files.all if assessment.finance_check.present?
+    attachments << assessment.sow_check.files.all if assessment.sow_check&.files.present?
+    attachments << assessment.finance_check.files.all if assessment.finance_check&.files.present?
     attachments.flatten!
 
     attachments.each_with_index do |attachment, index|
