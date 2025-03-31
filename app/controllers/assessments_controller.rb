@@ -1,5 +1,5 @@
 class AssessmentsController < ApplicationController
-  before_action :set_assessment, only: [:show, :edit, :update, :destroy, :download_bundle]
+  before_action :set_assessment, only: [:show, :edit, :update, :destroy, :download_bundle, :download_analysis]
 
   # GET /assessments
   def index
@@ -97,6 +97,14 @@ class AssessmentsController < ApplicationController
       redirect_to rails_blob_path(@assessment.export_bundle.file, disposition: "attachment")
     else
       redirect_to assessment_path(@assessment), alert: I18n.t("assessments.download_bundle.no_file")
+    end
+  end
+
+  def download_analysis
+    if @assessment.file.attached?
+      redirect_to rails_blob_path(@assessment.file, disposition: "attachment")
+    else
+      redirect_to assessment_path(@assessment), alert: I18n.t("assessments.download_analysis.no_file")
     end
   end
 

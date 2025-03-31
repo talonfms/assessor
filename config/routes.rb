@@ -56,6 +56,7 @@ Rails.application.routes.draw do
     resources :assessments do
       member do
         get "download_bundle"
+        get "download_analysis"
       end
     end
     resources :finance_checks, only: [:update]

@@ -99,43 +99,52 @@
           <em><%= I18n.t('assessments.analysis.not_available') %></em>
         </p>
       <% elsif assessment.submitted? || assessment.completed? %>
-        <% if Current.account_user.admin? %>
-          <div class="relative overflow-x-auto">
-            <table class="w-full text-sm text-left text-gray-500">
-              <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                <tr>
-                  <th scope="col" class="px-6 py-3">File Name</th>
-                  <th scope="col" class="px-6 py-3">Size</th>
-                  <th scope="col" class="px-6 py-3">Upload Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% if assessment.file.attached? %>
-                  <tr class="bg-white border-b">
-                    <td class="px-6 py-4"><%= assessment.file.filename %></td>
-                    <td class="px-6 py-4"><%= number_to_human_size(assessment.file.byte_size) %></td>
-                    <td class="px-6 py-4"><%= l assessment.file.created_at, format: :long %></td>
-                      <td class="px-6 py-4">
-                        <%= button_to assessment, 
-                            params: { assessment: { remove_file: true } },
-                            method: :patch,
-                            form: { data: { turbo_confirm: I18n.t('assessments.show.delete_file') } },
-                            class: "text-red-600 hover:text-red-900" do %>
-                          <%= heroicon :trash %>
-                        <% end %>
-                      </td>
-                  </tr>
-                <% else %>
-                  <tr class="bg-white border-b">
-                    <td colspan="4" class="px-6 py-4 text-center text-gray-500">
-                      <%= I18n.t('assessments.show.no_files') %>
+        <% if assessment.file.blank? && !Current.account_user&.admin? %>
+          <p style="margin-bottom:20px">
+            <em><%= I18n.t('assessments.analysis.underway') %></em>
+          </p>
+        <% end %>
+        <!-- file table -->
+        <div class="relative overflow-x-auto">
+          <table class="w-full text-sm text-left text-gray-500">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+              <tr>
+                <th scope="col" class="px-6 py-3">File Name</th>
+                <th scope="col" class="px-6 py-3">Size</th>
+                <th scope="col" class="px-6 py-3">Upload Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if assessment.file.attached? %>
+                <tr class="bg-white border-b">
+                  <td class="px-6 py-4"><%= assessment.file.filename %></td>
+                  <td class="px-6 py-4"><%= number_to_human_size(assessment.file.byte_size) %></td>
+                  <td class="px-6 py-4"><%= l assessment.file.created_at, format: :long %></td>
+                  <% if Current.account_user&.admin? %>
+                    <td class="px-6 py-4">
+                      <%= button_to assessment, 
+                          params: { assessment: { remove_file: true } },
+                          method: :patch,
+                          form: { data: { turbo_confirm: I18n.t('assessments.show.delete_file') } },
+                          class: "text-red-600 hover:text-red-900" do %>
+                        <%= heroicon :trash %>
+                      <% end %>
                     </td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-           <div data-controller="modal">
+                  <% end %>
+                </tr>
+              <% else %>
+                <tr class="bg-white border-b">
+                  <td colspan="4" class="px-6 py-4 text-center text-gray-500">
+                    <%= I18n.t('assessments.show.no_files') %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <% if Current.account_user&.admin? && assessment.file.blank? %>
+        <!-- upload button and modal -->
+          <div data-controller="modal">
             <button class="btn btn-secondary my-4" data-action="click->modal#open:prevent"><%= I18n.t('assessments.show.upload_analysis_file') %></button>
             <dialog class="modal modal-lg" data-modal-target="dialog" data-action="click-&gt;modal#backdropClose">
               <%= form_with(model: assessment, id: dom_id(assessment), local: false) do |form| %>
@@ -165,9 +174,11 @@
             </dialog>
           </div>
         <% else %>
-         <p>
-          <em><%= I18n.t('assessments.analysis.underway') %></em>
-        </p>
+          <% if assessment.file.present? && !Current.account_user.admin %>
+          <div style="margin-top:20px">
+            <%= link_to I18n.t('assessments.show.download_analysis'), download_analysis_assessment_path(assessment), method: :get, class: "btn btn-secondary" %>
+          </div>
+          <% end %>
         <% end %>
       <% end %>
     </div>
