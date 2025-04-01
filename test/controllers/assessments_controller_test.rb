@@ -1,6 +1,7 @@
 require "test_helper"
 
 class AssessmentsControllerTest < ActionDispatch::IntegrationTest
+  include ActiveStorageHelpers
   setup do
     sign_in_as_admin(users(:one), accounts(:one))
     @assessment = assessments(:one)
@@ -48,6 +49,30 @@ class AssessmentsControllerTest < ActionDispatch::IntegrationTest
     assert_not_nil ExportBundle.find_by(assessment: @assessment)
     assert_equal 1, ExportBundleWorker.jobs.size
     assert_equal @assessment.id, ExportBundleWorker.jobs.first["args"].first
+  end
+
+  test "should remove file when the remove_file param is true" do
+    @assessment.update!(status: "completed")
+    attach_file_to_fixture(@assessment, :file, "test/fixtures/files/test_pdf.pdf", "application/pdf")
+    @assessment.reload
+    patch assessment_url(@assessment), params: {assessment: {remove_file: "true"}}
+    @assessment.reload
+    assert_equal "submitted", @assessment.status
+    assert_redirected_to assessment_url(@assessment)
+    assert_equal I18n.t("assessments.show.successfully_removed"), flash[:notice]
+    assert_not @assessment.file.attached?
+  end
+
+  test "should download analysis file if file is attached" do
+    attach_file_to_fixture(@assessment, :file, "test/fixtures/files/test_pdf.pdf", "application/pdf")
+    get download_analysis_assessment_url(@assessment)
+    assert_redirected_to rails_blob_path(@assessment.file, disposition: "attachment")
+  end
+
+  test "should not download analysis file if file is not attached" do
+    assert_not @assessment.file.attached?
+    get download_analysis_assessment_url(@assessment)
+    assert_redirected_to assessment_path(@assessment), alert: I18n.t("assessments.download_analysis.no_file")
   end
 
   test "should destroy assessment" do

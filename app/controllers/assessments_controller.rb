@@ -55,7 +55,7 @@ class AssessmentsController < ApplicationController
       @assessment.update!(status: "submitted")
 
       respond_to do |format|
-        format.html { redirect_to @assessment, notice: "File was successfully removed." }
+        format.html { redirect_to @assessment, notice: I18n.t("assessments.show.successfully_removed") }
         format.json { render :show, status: :ok, location: @assessment }
       end
       return

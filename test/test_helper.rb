@@ -68,3 +68,13 @@ WebMock.disable_net_connect!({
     "selenium"
   ]
 })
+
+module ActiveStorageHelpers
+  def attach_file_to_fixture(fixture, attribute, file_path, content_type)
+    fixture.send(attribute).attach(
+      io: File.open(file_path),
+      filename: File.basename(file_path),
+      content_type: content_type
+    )
+  end
+end
