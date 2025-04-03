@@ -43,7 +43,7 @@ class ConvertResponsesToCsv
     when "text"
       response_data["text"]
     when "block_option_id"
-      BlockOption.find_by(id: response_data["block_option_id"].to_i)&.key || "Unknown"
+      BlockOption.find_by(id: response_data["block_option_id"].to_i)&.key || I18n.t("unknown")
     when nil
       ""
     end

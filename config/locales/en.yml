@@ -41,6 +41,7 @@ en:
   something_went_wrong: "Something went wrong"
   unauthorized: "You are not authorized to perform this action."
   reveal: "Reveal"
+  unknown: "Unknown"
 
   account_invitations_mailer:
     invite:
