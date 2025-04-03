@@ -65,6 +65,7 @@ class AssessmentsController < ApplicationController
       if @assessment.update(assessment_params)
         if @assessment.file.attached?
           @assessment.update!(status: "completed")
+          AssessmentsMailer.new_analysis(@assessment).deliver
         end
 
         if @assessment.submitted?

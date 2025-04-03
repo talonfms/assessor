@@ -35,4 +35,8 @@ class Account < ApplicationRecord
   def owner?(user)
     owner_id == user.id
   end
+
+  def members
+    account_users.select { |account_user| account_user.roles.try(:[], "member") == true }
+  end
 end
