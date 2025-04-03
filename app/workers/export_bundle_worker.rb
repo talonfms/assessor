@@ -35,7 +35,7 @@ class ExportBundleWorker
       )
 
       if bundle.file.attached?
-        bundle.update!(status: "completed")
+        bundle.update!(error_message: nil, status: "completed")
       else
         bundle.update!(status: "errored", error_message: I18n.t("export_bundles.error_message"))
       end

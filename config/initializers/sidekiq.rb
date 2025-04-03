@@ -1,6 +1,6 @@
 require "sidekiq/api"
 
-redis_url = Rails.env.development? ? "redis://localhost:6379/0" : ENV["REDISCLOUD_URL"]
+redis_url = Rails.env.development? ? "redis://localhost:6379/1" : ENV["REDISCLOUD_URL"]
 
 Sidekiq.configure_server do |config|
   config.redis = {url: redis_url}

@@ -17,6 +17,7 @@ module JumpstartApp
     config.autoload_lib(ignore: %w[assets generators jumpstart tasks templates])
 
     config.autoload_paths += %W[#{config.root}/app/workers]
+    config.eager_load = true
 
     # Configuration for the application, engines, and railties goes here.
     #

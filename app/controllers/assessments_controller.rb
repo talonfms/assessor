@@ -69,7 +69,7 @@ class AssessmentsController < ApplicationController
 
         if @assessment.submitted?
           ExportBundle.find_or_create_by(assessment_id: @assessment.id)
-          ExportBundleWorker.perform_async(@assessment.id)
+          ::ExportBundleWorker.perform_async(@assessment.id)
         end
 
         format.html { redirect_to @assessment, notice: "Assessment was successfully updated." }
