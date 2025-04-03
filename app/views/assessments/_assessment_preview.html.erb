@@ -1,7 +1,7 @@
 <div id="<%= dom_id assessment %>">
   <div class="mb-4">
     <p class="text-sm font-medium text-gray-500">Name</p>
-    <%= assessment.name %> <%= render LabelComponent.new(text: assessment.translated_status, type: :info) %>
+    <%= assessment.name %> <%= assessment_label(assessment) %>
   </div>
   <div class="mb-4">
     <p class="text-sm font-medium text-gray-500">Created</p>

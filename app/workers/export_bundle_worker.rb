@@ -26,14 +26,16 @@ class ExportBundleWorker
 
       bundle = assessment.export_bundle
 
+      name = assessment.name.gsub(" ", "_")
+
       bundle.file.attach(
         io: File.open(zip_path),
-        filename: "assessment_export_#{assessment.id}.zip",
+        filename: "assessment_export_#{name}_#{assessment.id}.zip",
         content_type: "application/zip"
       )
 
       if bundle.file.attached?
-        bundle.update!(status: "completed")
+        bundle.update!(error_message: nil, status: "completed")
       else
         bundle.update!(status: "errored", error_message: I18n.t("export_bundles.error_message"))
       end
