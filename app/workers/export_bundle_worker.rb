@@ -26,9 +26,11 @@ class ExportBundleWorker
 
       bundle = assessment.export_bundle
 
+      name = assessment.name.gsub(" ", "_")
+
       bundle.file.attach(
         io: File.open(zip_path),
-        filename: "assessment_export_#{assessment.id}.zip",
+        filename: "assessment_export_#{name}_#{assessment.id}.zip",
         content_type: "application/zip"
       )
 
