@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width">
-    <link type="image/x-icon" rel="shortcut icon" href="<%= @partner.favicon_url %>">
+    <link type="image/x-icon" rel="shortcut icon" href="<%#= @partner.favicon_url %>">
     <title><%= @subject %></title>
     <style type="text/css">
       /* Client-specific Styles */
@@ -17,7 +17,6 @@
         img{border:none; font-size:14px; font-weight:bold; height:auto; line-height:100%; outline:none; text-decoration:none; text-transform:capitalize;}
         #backgroundTable{height:100% !important; margin:0; padding:0; width:100% !important;}
     </style>
-    <%= stylesheet_link_tag "mailer" %>
   </head>
   <body style="background-color:#e6e6e6; color:#535353; font-size:13pt; font-family:Helvetica, Arial, sans-serif; line-height:1.4; width:100% !important; -webkit-text-size-adjust:none; margin:0; padding:0; "
   yahoo="ignores_media_queries_and_adds_contents_to_styles" width="100%">
@@ -26,7 +25,7 @@
         <!--Pre-Header Text=-->
         <!--Edit this text to control what is displayed in the preview pane of the email
         client-->
-        <p><span style="display: none; color: #e6e6e6; font-size: 1px;"><%= @teaser || "Update from #{t("views.title")}" %></span>
+        <p><span style="display: none; color: #e6e6e6; font-size: 1px;"><%#= @teaser || "Update from #{t("views.title")}" %></span>
         </p>
         <!--Email Container-->
         <table id="container" style="background: #e6e6e6; line-height: 1.4em;"
@@ -52,15 +51,17 @@
                             <tr width="600">
                               <!--Logo/Login Link Header-->
                             </tr>
+                             <!--
                             <tr width="600" height="85">
                               <td align="center" style="padding-left: 30px; padding-bottom: 15px; padding-top:20px" width="170" valign="bottom">
-                                <a title="Visit <%= t("views.title") %>" href="<%= root_url(host: @partner.host) %>"
+                                <a title="Visit Zivio" href="https://www.zivio.com/"
                                 target="_blank">
-                                  <img title="Visit <%= t("views.title") %>" src="<%= @partner.light_logo_url %>"
-                                  alt="<%= t("views.title") %> logo" />
+                                  <img title="Visit Zivio" src="http://127.0.0.1:3001/app/assets/images/zivio-logo-dark-transparent.png"
+                                  alt="Zivio Logo" />
                               </a>
                             </td>
                           </tr>
+                          -->
                         </tbody>
                       </table>
                     </td>
@@ -87,16 +88,16 @@
                             <td style="text-align: right; padding-bottom: 20px; padding-top: 30px;" width="100">
                               <p style="color: #bbbbbb; font-weight: 400; line-height: 20px; font-size: 12px; margin-top: 0px; margin-bottom: 0px; padding-top: 0; padding-bottom: 0;">
                                 <a style="color: #bbbbbb; font-weight: 400; line-height: 20px; font-size: 12px; margin-top: 0px; margin-bottom: 0px; padding-top: 0; padding-bottom: 0; text-decoration: none; font-family: Helvetica, Arial, sans-serif;"
-                                  href="<%= root_url(host: @partner.host) %>"
-                                  target="_blank"><%= t("views.title") %></a>
+                                  href="<%#= root_url(host: @partner.host) %>"
+                                  target="_blank"><%#= t("views.title") %></a>
                               </p>
                             </td>
                             <td style="text-align: center; padding-bottom: 20px; padding-top: 30px;" width="100"><span>&nbsp;</span>
                               <td style="text-align: left; padding-bottom: 20px; padding-top: 30px;" width="100">
                                 <p style="color: #bbbbbb; font-weight: 400; line-height: 20px; font-size: 12px; margin-top: 0px; margin-bottom: 0px; padding-top: 0; padding-bottom: 0; font-family: Helvetica, Arial, sans-serif;">
                                   <a style="color: #bbbbbb; font-weight: 400; line-height: 20px; font-size: 12px; margin-top: 0px; margin-bottom: 0px; padding-top: 0; padding-bottom: 0; text-decoration: none;"
-                                  href="mailto:<%= t("mailer.info_email") %>"
-                                  target="_blank"><%= Mail::Address.new(t("mailer.info_email")).address %></a>
+                                  href="mailto:<%#= t("mailer.info_email") %>"
+                                  target="_blank"><%#= Mail::Address.new(t("mailer.info_email")).address %></a>
                                 </p>
                               </td>
                             </tr>
@@ -130,12 +131,12 @@
                     <tr>
                       <td style="font-size: 11px; color: #999999; line-height: 1.6em !important;" valign="top">
                         <!--Email Sent to-->
-                        <p style="line-height: 1.6em !important; margin-bottom: 10px; margin-top: 0; padding-top: 0; padding-bottom: 0;"><%= t("views.layouts.mailer.sent_to") %>:
+                        <p style="line-height: 1.6em !important; margin-bottom: 10px; margin-top: 0; padding-top: 0; padding-bottom: 0;"><%#= t("views.layouts.mailer.sent_to") %>:
                           <a style="color: #888888; font-weight: bold; text-decoration: none;"
                           href=""
                           target="_blank"><%= @to %></a><br/>
-                          <%= t("views.layouts.mailer.sent_by") %>:
-                          <%= t("views.physical_address") %></p>
+                          <%#= t("views.layouts.mailer.sent_by") %>:
+                          <%#= t("views.physical_address") %></p>
                         <% if @unsubscribe_url.present? %>
                           <p><%= t("views.layouts.mailer.update_settings_html", update_settings_link: link_to(t("views.layouts.mailer.update_settings_link_text"), @unsubscribe_url, style: "color: #999999")) %>
                             .</p>
