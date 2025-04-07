@@ -132,10 +132,10 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.25.1.tgz#7d79922cb2d88f9048f06393dbf62d2e4accb584"
   integrity sha512-Y1EQdcfwMSeQN/ujR5VayLOJ1BHaK+ssyk0AEzPjC+t1lITgsnccPqFjb6V+LsTp/9Iov4ysfjxLaGJ9RPtkVg==
 
-"@hotwired/hotwire-native-bridge@^1.0.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@hotwired/hotwire-native-bridge/-/hotwire-native-bridge-1.1.0.tgz#2dc7f8101f0a2a7bca2f304ff4d92bed35233369"
-  integrity sha512-ncP/pJt6QxlZypYLvtFmP8FXmHmt2N/CrCGDOI5VuzpL7ZCdara2QYf/70LMYlqRGEJtPEwZBcggQP+Kd7qlQQ==
+"@hotwired/hotwire-native-bridge@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@hotwired/hotwire-native-bridge/-/hotwire-native-bridge-1.2.1.tgz#22d1ba06ac627f1dc8e9b6496fbe46e42f0d1794"
+  integrity sha512-bqNw+VEd2pgYMkCdl3jMHC51jZZVWvPupBaVJ5nHHEgixe16Tz5qECvrfHUBrksED48qrUk4hdTPCMXuUM5GJQ==
 
 "@hotwired/stimulus@^3.0.0", "@hotwired/stimulus@^3.2.2":
   version "3.2.2"
