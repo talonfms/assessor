@@ -175,4 +175,10 @@ class AccountTest < ActiveSupport::TestCase
   test "account can be subscribed" do
     assert accounts(:subscribed).payment_processor.subscribed?
   end
+
+  test "members" do
+    account = accounts(:company)
+    assert_equal 1, account.members.count
+    assert_equal account.members.first.user, users(:three)
+  end
 end

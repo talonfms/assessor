@@ -627,3 +627,12 @@ en:
         name: "Steve Jobs"
         email: "you@example.com"
         password: "password"
+  mailers:
+    shared:
+      regards: "Regards"
+      sign_off: "The Zivio Team"
+    assessments_mailer:
+      new_analysis:
+        subject: "New analysis available for your assessment"
+        lead: "A new analysis has been uploaded for your assessment"
+        body: "Please click on the link below and navigate to the 'analysis' tab to download the analysis."

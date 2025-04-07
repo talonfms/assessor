@@ -63,8 +63,9 @@ class AssessmentsController < ApplicationController
 
     respond_to do |format|
       if @assessment.update(assessment_params)
-        if @assessment.file.attached?
+        if @assessment.file.attached? && assessment_params[:file].present?
           @assessment.update!(status: "completed")
+          AssessmentsMailer.new_analysis(@assessment).deliver_later
         end
 
         if @assessment.submitted?

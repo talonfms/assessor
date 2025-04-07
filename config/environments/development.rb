@@ -73,8 +73,15 @@ Rails.application.configure do
   # config.active_record.strict_loading_by_default = true
 
   # Deliver emails to Mailbin for development
-  config.action_mailer.delivery_method = :mailbin
-
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: ENV["SMTP_HOST"],
+    domain: ENV["SMTP_HOST"],
+    port: ENV["SMTP_PORT"],
+    user_name: ENV["SMTP_USERNAME"],
+    password: ENV["SMTP_PASSWORD"],
+    authentication: :cram_md5
+  }
   # Allow accessing localhost on any domain. Important for testing multi-tenant apps.
   config.hosts = nil
 

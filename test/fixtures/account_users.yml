@@ -20,6 +20,13 @@ company_regular_user:
   account: company
   user: two
 
+company_member:
+  account: company
+  user: three
+  roles:
+    admin: false
+    member: true
+
 invited_user:
   account: invited
   user: invited

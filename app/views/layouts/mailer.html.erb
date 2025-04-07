@@ -1,152 +1,157 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="<%= I18n.locale %>">
-
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <style type="text/css">
-    /* Client-specific Styles */
-    #outlook a {
-      padding: 0;
-    }
-
-    /* Force Outlook to provide a "view in browser" button. */
-    body {
-      width: 100% !important;
-    }
-
-    .ReadMsgBody {
-      width: 100%;
-    }
-
-    .ExternalClass {
-      width: 100%;
-    }
-
-    /* Force Hotmail to display emails at full width */
-    body {
-      -webkit-text-size-adjust: none;
-    }
-
-    /* Prevent Webkit platforms from changing default text sizes. */
-
-    /* Reset Styles */
-    body {
-      margin: 0;
-      padding: 0;
-    }
-
-    img {
-      border: 0;
-      height: auto;
-      line-height: 100%;
-      outline: none;
-      text-decoration: none;
-    }
-
-    table td {
-      border-collapse: collapse;
-    }
-
-    .bodyContent div {
-      color: #505050;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      line-height: 150%;
-      text-align: left;
-    }
-
-    .addressContent div {
-      color: #505050;
-      font-family: Arial, sans-serif;
-      font-size: 12px;
-      line-height: 140%;
-      text-align: left;
-    }
-
-    .bodyContent img {
-      display: inline;
-      height: auto;
-    }
-
-    .bodyContent div a:link,
-    .bodyContent div a:visited,
-    .bodyContent div a .yshortcuts
-
-    /* Yahoo! Mail Override */
-      {
-      color: #336699;
-      font-weight: normal;
-      text-decoration: underline;
-    }
-  </style>
-</head>
-
-<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
-  <center>
-    <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%">
-      <tr>
-        <td align="center" valign="top" style="padding-top:20px;">
-          <table border="0" cellpadding="0" cellspacing="0" width="600">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://xxx.x0.xxx/XX/xxxx0/xxxxx.xxx">
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link type="image/x-icon" rel="shortcut icon" href="<%#= @partner.favicon_url %>">
+    <title><%= @subject %></title>
+    <style type="text/css">
+      /* Client-specific Styles */
+        #outlook a{padding:0;} /* Force Outlook to provide a "view in browser" button. */
+        body{width:100% !important;} /* Force Hotmail to display emails at full width */
+        body{-webkit-text-size-adjust:none;} /* Prevent Webkit platforms from changing default text sizes. */
+      
+        /* Reset Styles */
+        body{margin:0; padding:0;}
+        img{border:none; font-size:14px; font-weight:bold; height:auto; line-height:100%; outline:none; text-decoration:none; text-transform:capitalize;}
+        #backgroundTable{height:100% !important; margin:0; padding:0; width:100% !important;}
+    </style>
+  </head>
+  <body style="background-color:#e6e6e6; color:#535353; font-size:13pt; font-family:Helvetica, Arial, sans-serif; line-height:1.4; width:100% !important; -webkit-text-size-adjust:none; margin:0; padding:0; "
+  yahoo="ignores_media_queries_and_adds_contents_to_styles" width="100%">
+    <div>
+      <div class="mktEditable">
+        <!--Pre-Header Text=-->
+        <!--Edit this text to control what is displayed in the preview pane of the email
+        client-->
+        <p><span style="display: none; color: #e6e6e6; font-size: 1px;"><%#= @teaser || "Update from #{t("views.title")}" %></span>
+        </p>
+        <!--Email Container-->
+        <table id="container" style="background: #e6e6e6; line-height: 1.4em;"
+        border="0" cellspacing="0" cellpadding="0" width="98%" align="center">
+          <tbody>
+            <!--padding row-->
             <tr>
-              <td align="center" valign="top">
-                <table border="0" cellpadding="0" cellspacing="0" width="600">
-                  <tr>
-                    <td valign="top" class="bodyContent">
-                      <table border="0" cellpadding="20" cellspacing="0" width="100%">
-                        <tr>
-                          <td valign="top">
-                            <div>
+              <td height="20"></td>
+            </tr>
+            <tr>
+              <td>
+                <%= yield :header %>
+                <!--Email Body-->
+                <table id="body" style="background-color: #ffffff;"
+                border="0" cellspacing="0" cellpadding="0" width="600" align="center">
+                  <tbody>
+                    <!--Header Sections-->
+                    <tr width="600">
+                      <td>
+                        <table id="header-sections" style="background-color: #ffffff; line-height: 1.6em; color: #535353; font-size: 16px;"
+                        border="0" cellspacing="0" cellpadding="0" width="600" align="center">
+                          <tbody>
+                            <tr width="600">
+                              <!--Logo/Login Link Header-->
+                            </tr>
+                             <!--
+                            <tr width="600" height="85">
+                              <td align="center" style="padding-left: 30px; padding-bottom: 15px; padding-top:20px" width="170" valign="bottom">
+                                <a title="Visit Zivio" href="https://www.zivio.com/"
+                                target="_blank">
+                                  <img title="Visit Zivio" src="http://127.0.0.1:3001/app/assets/images/zivio-logo-dark-transparent.png"
+                                  alt="Zivio Logo" />
+                              </a>
+                            </td>
+                          </tr>
+                          -->
+                        </tbody>
+                      </table>
+                    </td>
+                  </tr>
+                  <!--Email Sections-->
+                  <tr width="600">
+                    <td>
+                      <!--Intro Text and Image-->
+                      <table id="intro" style="background-color: #ffffff; line-height: 1.6em; color: #535353; font-size: 16px;"
+                        border="0" cellspacing="0" cellpadding="0" width="600" align="center">
+                        <tbody>
+                          <tr width="600">
+                            <td style="padding-left: 30px; padding-right: 30px;" width="540">
                               <%= yield %>
-                            </div>
-                          </td>
-                        </tr>
+                            </td>
+                          </tr>
+                        </tbody>
                       </table>
-                    </td>
-                  </tr>
+                      <!--Contact Info-->
+                      <table id="contact-info" style="background-color: #ffffff;line-height: 1.6em; color: #535353; font-size: 16px;"
+                        border="0" cellspacing="0" cellpadding="0" width="600" align="center">
+                        <tbody>
+                          <tr width="600">
+                            <td style="text-align: right; padding-bottom: 20px; padding-top: 30px;" width="100">
+                              <p style="color: #bbbbbb; font-weight: 400; line-height: 20px; font-size: 12px; margin-top: 0px; margin-bottom: 0px; padding-top: 0; padding-bottom: 0;">
+                                <a style="color: #bbbbbb; font-weight: 400; line-height: 20px; font-size: 12px; margin-top: 0px; margin-bottom: 0px; padding-top: 0; padding-bottom: 0; text-decoration: none; font-family: Helvetica, Arial, sans-serif;"
+                                  href="<%#= root_url(host: @partner.host) %>"
+                                  target="_blank"><%#= t("views.title") %></a>
+                              </p>
+                            </td>
+                            <td style="text-align: center; padding-bottom: 20px; padding-top: 30px;" width="100"><span>&nbsp;</span>
+                              <td style="text-align: left; padding-bottom: 20px; padding-top: 30px;" width="100">
+                                <p style="color: #bbbbbb; font-weight: 400; line-height: 20px; font-size: 12px; margin-top: 0px; margin-bottom: 0px; padding-top: 0; padding-bottom: 0; font-family: Helvetica, Arial, sans-serif;">
+                                  <a style="color: #bbbbbb; font-weight: 400; line-height: 20px; font-size: 12px; margin-top: 0px; margin-bottom: 0px; padding-top: 0; padding-bottom: 0; text-decoration: none;"
+                                  href="mailto:<%#= t("mailer.info_email") %>"
+                                  target="_blank"><%#= Mail::Address.new(t("mailer.info_email")).address %></a>
+                                </p>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <!--end Contact Info-->
+                      </td>
+                    </tr>
+                    <!--end Email sections-->
+                  </tbody>
                 </table>
+                <!--end body-->
               </td>
             </tr>
+          </tbody>
+        </table>
+        <!--end container table-->
+        <!--Footer Container-->
+        <table id="foot-container" style="background: #e6e6e6; line-height: 1.4em;"
+        border="0" cellspacing="0" cellpadding="0" width="98%" align="center">
+          <tbody>
             <tr>
-              <td align="center" valign="top">
-                <table border="0" cellpadding="10" cellspacing="0" width="600">
-                  <tr>
-                    <td valign="top">
-                      <table border="0" cellpadding="10" cellspacing="0" width="100%">
-                        <tr>
-                          <td valign="top" class="addressContent">
-                            <div>
-                              <em><%= t(".copyright_html", year: Date.current.year) %></em>
-                              <br>
-                              <strong><%= t(".mailing_address") %></strong>
-                              <%= simple_format [Jumpstart.config.business_name, Jumpstart.config.business_address].join("\n") %>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td valign="middle" class="bodyContent">
-                            <div>
-                              &nbsp;
-                              <%= link_to t(".view_in_browser"), "#", target: :_blank %>
-                              |
-                              <%= link_to t(".unsubscribe"), "#", target: :_blank %>
-                              |
-                              <%= link_to t(".preferences"), "#", target: :_blank %>
-                              &nbsp;
-                            </div>
-                          </td>
-                        </tr>
-                      </table>
-                    </td>
-                  </tr>
+              <td>
+                <!--Email Closer-->
+                <table id="email-signoff" style="margin-bottom: 25px; background: #e6e6e6;"
+                border="0" cellspacing="0" cellpadding="0" width="600" align="center">
+                  <tbody>
+                    <tr>
+                      <td colspan="2" height="25"></td>
+                    </tr>
+                    <tr>
+                      <td style="font-size: 11px; color: #999999; line-height: 1.6em !important;" valign="top">
+                        <!--Email Sent to-->
+                        <p style="line-height: 1.6em !important; margin-bottom: 10px; margin-top: 0; padding-top: 0; padding-bottom: 0;"><%#= t("views.layouts.mailer.sent_to") %>:
+                          <a style="color: #888888; font-weight: bold; text-decoration: none;"
+                          href=""
+                          target="_blank"><%= @to %></a><br/>
+                          <%#= t("views.layouts.mailer.sent_by") %>:
+                          <%#= t("views.physical_address") %></p>
+                        <% if @unsubscribe_url.present? %>
+                          <p><%= t("views.layouts.mailer.update_settings_html", update_settings_link: link_to(t("views.layouts.mailer.update_settings_link_text"), @unsubscribe_url, style: "color: #999999")) %>
+                            .</p>
+                        <% end %>
+                      </td>
+                    </tr>
+                  </tbody>
                 </table>
+                <!--end email-signoff-->
               </td>
             </tr>
-          </table>
-          <br>
-        </td>
-      </tr>
-    </table>
-  </center>
-</body>
-
+          </tbody>
+        </table>
+        <!--end foot container table-->
+      </div>
+    </div>
+  </body>
 </html>

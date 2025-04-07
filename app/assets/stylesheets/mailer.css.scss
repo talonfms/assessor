@@ -1,0 +1,144 @@
+th {
+  text-align: left;
+}
+
+.table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 100%;
+  > thead,
+  > tbody,
+  > tfoot {
+    > tr {
+      > th,
+      > td {
+        padding: 5px;
+        vertical-align: top;
+        border-top: 1px solid #ddd
+      }
+    }
+  }
+  // Bottom align for column headings
+  > thead > tr > th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #ddd
+  }
+  // Remove top border from thead by default
+  > caption + thead,
+  > colgroup + thead,
+  > thead:first-child {
+    > tr:first-child {
+      > th,
+      > td {
+        border-top: 0;
+      }
+    }
+  }
+  // Account for multiple tbody instances
+  > tbody + tbody {
+    border-top: 2px solid #ddd
+  }  
+}
+
+.red {
+  color: red;
+}
+
+.table-bordered {
+  border: 1px solid black;
+  > thead,
+  > tbody,
+  > tfoot {
+    > tr {
+      > th,
+      > td {
+        border: 1px solid black;
+      }
+    }
+  }
+  > thead > tr {
+    > th,
+    > td {
+      border-bottom-width: 2px;
+    }
+  }
+}
+.spacer {
+  height: 10px;
+  mso-line-height-rule: exactly;
+  line-height: 10px;
+  font-size: 10px;
+  display: block;
+}
+h2{
+    color:#404040 !important;    
+    font-size:26px;
+    font-style:normal;
+    font-weight:bold;
+    line-height:125%;
+    letter-spacing:-.75px;
+    margin:0;
+    text-align:left;
+  }
+  /*
+  @tab Page
+  @section heading 3
+  @tip Set the styling for all third-level headings in your emails.
+  @style heading 3
+  */
+  h3{
+    color:#606060 !important;  
+    font-size:18px;
+    font-style:normal;
+    font-weight:bold;
+    line-height:125%;
+    letter-spacing:-.5px;
+    margin:0;
+    text-align:left;
+  }
+  /*
+  @tab Page
+  @section heading 4
+  @tip Set the styling for all fourth-level headings in your emails. These should be the smallest of your headings.
+  @style heading 4
+  */
+  h4{
+    color:#808080 !important;    
+    font-size:16px;
+    font-style:normal;
+    font-weight:bold;
+    line-height:125%;
+    letter-spacing:normal;
+    margin:0;
+    text-align:left;
+  }
+
+  .avatar-initials {
+    background-color: #d91e18;
+    height: 32px;
+    text-align: center;
+    width: 32px;
+    font-weight:bold;
+    display:inline-block;
+    vertical-align:middle;
+  }
+
+  .initials {
+    font-size: 16px;
+    line-height: 1;
+    position: relative;
+    top: 8px;
+    color:white;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    font-family: "Roboto", sans-serif;
+    justify-content: center;
+    margin: 0;
+  }

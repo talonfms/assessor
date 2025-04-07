@@ -1,0 +1,5 @@
+<%= t("mailers.assessments_mailer.new_analysis.lead")%>: <%= link_to @assessment.name, assessment_url(@assessment) %>.
+<%= t('mailers.assessments_mailer.new_analysis.body') %>
+<%= link_to I18n.t('assessments.preview.view'), assessment_url(@assessment), class: "btn btn-secondary" %>
+<%= t('mailers.shared.regards') %>,
+<%= render "shared/mailers/sign_off" %>
