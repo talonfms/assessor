@@ -46,7 +46,7 @@ gem "translate_enum"
 
 gem "positioning"
 
-gem "rubyzip", "~> 2.3"
+gem "rubyzip", "~> 2.4"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
