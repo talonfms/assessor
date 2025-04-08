@@ -30,9 +30,9 @@
             <% if sow_check.assessment.in_progress? %>
               <td class="px-6 py-4">
                 <%= button_to sow_check, 
-                    params: { sow_check: { files: sow_check.files.reject { |f| f.id == file.id }.map(&:signed_id) } },
+                    params: { sow_check: { remove_file: true, file_id: file.id} },
                     method: :patch,
-                    form: { data: { turbo_confirm: "Are you sure you want to delete this file?" } },
+                    form: { data: { turbo_confirm: I18n.t('assessments.show.delete_file') } },
                     class: "text-red-600 hover:text-red-900" do %>
                   <%= heroicon :trash%>
                 <% end %>

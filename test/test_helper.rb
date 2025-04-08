@@ -71,10 +71,20 @@ WebMock.disable_net_connect!({
 
 module ActiveStorageHelpers
   def attach_file_to_fixture(fixture, attribute, file_path, content_type)
-    fixture.send(attribute).attach(
-      io: File.open(file_path),
-      filename: File.basename(file_path),
-      content_type: content_type
-    )
+    attachment = fixture.public_send(attribute)
+
+    if attachment.respond_to?(:attach)
+      attachment.attach(
+        io: File.open(file_path),
+        filename: File.basename(file_path),
+        content_type: content_type
+      )
+    else
+      fixture.public_send(attribute).attach(
+        io: File.open(file_path),
+        filename: File.basename(file_path),
+        content_type: content_type
+      )
+    end
   end
 end
