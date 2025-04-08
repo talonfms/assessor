@@ -67,7 +67,7 @@
                 </p>
               </div>
               <div>
-                <% if assessment.in_progress? %>
+                <% if assessment.submittable? %>
                   <%= button_to "Submit Assessment", assessment_path(assessment, assessment: { status: "submitted" }), 
               method: :patch,
               class: "btn btn-primary",
@@ -77,9 +77,11 @@
                 }
               } %>
                 <% elsif assessment.submitted? %>
-                  <p><%= render LabelComponent.new(text: "Assessment Submitted", type: :info) %></p>
+                  <p><%= render LabelComponent.new(text: I18n.t('assessments.show.assessment_submitted'), type: :warning) %></p>
+                <% elsif assessment.completed? %>
+                  <p><%= render LabelComponent.new(text: I18n.t('assessments.show.assessment_completed'), type: :success) %></p>
                 <% else %>
-                  <div class="inline-block" data-controller="tooltip" data-tippy-content="Please complete all steps before submission" data-tippy-delay="0" data-tippy-arrow="true" data-tippy-size="regular" data-tippy-animation="fade">
+                  <div class="inline-block" data-controller="tooltip" data-tippy-content="Please add to all steps before submission" data-tippy-delay="0" data-tippy-arrow="true" data-tippy-size="regular" data-tippy-animation="fade">
                     <%= button_to "Submit Assessment", nil, disabled: true, class: "btn btn-primary" %>
                   </div>
                 <% end %>

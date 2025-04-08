@@ -21,6 +21,6 @@ class Assessment < ApplicationRecord
   attr_accessor :include_sow_check, :include_finance_check
 
   def submittable?
-    in_progress? && sow_check&.complete? && finance_check&.complete?
+    in_progress? && survey_responses.count >= 25 && sow_check&.complete? && finance_check&.complete?
   end
 end

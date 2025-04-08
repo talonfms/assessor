@@ -214,6 +214,8 @@ en:
       successfully_removed: "File was successfully removed."
       upload_analysis_file: "Upload Analysis File"
       download_analysis: "Download Analysis"
+      assessment_submitted: "Assessment submitted"
+      assessment_completed: "Assessment completed"
     preview:
       view: "View this assessment"
       download: "Download submissions"
