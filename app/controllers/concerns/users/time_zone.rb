@@ -8,9 +8,9 @@ module Users
 
     def browser_time_zone
       browser_tz = ActiveSupport::TimeZone.find_tzinfo(cookies[:browser_time_zone])
-      ActiveSupport::TimeZone.all.find { |zone| zone.tzinfo == browser_tz } || Time.zone
+      ActiveSupport::TimeZone.all.find { |zone| zone.tzinfo == browser_tz } || ActiveSupport::TimeZone["London"]
     rescue TZInfo::UnknownTimezone, TZInfo::InvalidTimezoneIdentifier
-      Time.zone
+      ActiveSupport::TimeZone["London"]
     end
   end
 end
