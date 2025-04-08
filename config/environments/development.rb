@@ -37,7 +37,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   # Set localhost to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = {host: "lvh.me", port: ENV.fetch("PORT", 3000).to_i}
+  config.action_mailer.default_url_options = {host: "http://127.0.0.1", port: 3001}
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -86,7 +86,7 @@ Rails.application.configure do
   config.hosts = nil
 
   # You may need to set to include the correct URLs from Turbo, etc
-  # config.action_controller.default_url_options = {host: "lvh.me", port: ENV.fetch("PORT", 3000).to_i}
+  # config.action_controller.default_url_options = {host: "http://127.0.0.1:3001/"}
 
   # Use matching queue adapter as production
   config.active_job.queue_adapter = Jumpstart.config.queue_adapter if Jumpstart.config.queue_adapter
