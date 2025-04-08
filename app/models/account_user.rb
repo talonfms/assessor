@@ -1,7 +1,8 @@
 class AccountUser < ApplicationRecord
   # Add account roles to this line
   # Do NOT to use any reserved words like `user` or `account`
-  ROLES = [:admin, :member]
+  ROLES = [:admin, :member, :super_admin]
+  VISIBLE_ROLES = [:admin, :member]
 
   include UpdatesSubscriptionQuantity
   include Roles
