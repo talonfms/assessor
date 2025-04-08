@@ -3,7 +3,7 @@
 <div class="container px-4 mx-auto my-8">
   <div class="flex items-center justify-between mb-4">
     <div>
-      <h1 class="h3">Assessments</h1>
+      <h1 class="h3"><%= t('assessments.index.assessments') %></h1>
       <div class="text-sm font-medium">
         <span class="text-gray-500 dark:text-gray-300/75">Sort by:</span>
         <%= sortable @assessments, :name, "Name", class: "text-gray-700 dark:text-gray-300 mr-1" %>
@@ -18,7 +18,7 @@
     <%= render partial: "assessments/assessment_preview", collection: @assessments, as: :assessment, cached: true %>
     <% if Current.account_user&.admin? %>
       <div class="hidden only:block text-center">
-        <p class="mb-4 h3">Create your first Assessment</p>
+        <p class="mb-4 h3"><%= t('assessments.index.create_assessment') %></p>
         <%= link_to t("scaffold.new.title", model: "Assessment"), new_assessment_path, class: "btn btn-primary" %>
       </div>
     <% end %>

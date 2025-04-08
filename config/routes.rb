@@ -78,5 +78,7 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Public marketing homepage
-  root to: "static#index"
+  devise_scope :user do
+    root to: "devise/sessions#new"
+  end
 end
