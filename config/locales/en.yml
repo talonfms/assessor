@@ -199,6 +199,9 @@ en:
       title: "Assessments"
 
   assessments:
+    index:
+      assessments: "Assessments"
+      create_assessment: "Create your first Assessment"
     new:
       name: "Name"
       survey_template_version: "Survey Template Version"
