@@ -42,6 +42,7 @@ en:
   unauthorized: "You are not authorized to perform this action."
   reveal: "Reveal"
   unknown: "Unknown"
+  or: "Or"
 
   account_invitations_mailer:
     invite:
@@ -85,6 +86,9 @@ en:
       description: "Collaborate and share with others by creating an account."
     edit:
       title: "Edit"
+      parent_account: "Parent Account:"
+      is_parent: "Is Parent Account?"
+      select_parent: "Select a parent account"
     created: "Account was successfully created."
     created_and_switch_html: 'Account was successfully created. <a class="underline" href="%{link}">Switch account</a>'
     updated: "Account was successfully updated."
@@ -588,6 +592,8 @@ en:
       models:
         account:
           attributes:
+            parent_account:
+              is_parent: "is_parent must be true on the parent account"
             domain:
               reserved: "%{value} is reserved."
             subdomain:

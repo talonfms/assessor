@@ -6,6 +6,8 @@ class Account < ApplicationRecord
   include Transfer
 
   belongs_to :owner, class_name: "User"
+  belongs_to :parent_account, class_name: "Account", optional: true
+  has_many :child_accounts, class_name: "Account", foreign_key: "parent_account_id", dependent: :nullify
   has_many :account_invitations, dependent: :destroy
   has_many :account_users, dependent: :destroy
   has_many :notification_mentions, as: :record, dependent: :destroy, class_name: "Noticed::Event"
@@ -23,6 +25,11 @@ class Account < ApplicationRecord
 
   validates :avatar, resizable_image: true
   validates :name, presence: true
+  validate :is_parent_must_be_truthy, if: :parent_account_id_changed?
+
+  def child_account?
+    parent_account_id.present?
+  end
 
   def team?
     !personal?
@@ -38,5 +45,11 @@ class Account < ApplicationRecord
 
   def members
     account_users.select { |account_user| account_user.roles.try(:[], "member") == true }
+  end
+
+  def is_parent_must_be_truthy
+    if parent_account_id.present? && !parent_account.is_parent?
+      errors.add(:parent_account_id, t("activerecord.errors.models.account.attributes.parent_account.is_parent"))
+    end
   end
 end

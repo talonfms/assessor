@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_26_094407) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_09_150034) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -48,7 +48,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_26_094407) do
     t.string "subdomain"
     t.string "billing_email"
     t.integer "account_users_count", default: 0
+    t.bigint "parent_account_id"
+    t.boolean "is_parent", default: false
     t.index ["owner_id"], name: "index_accounts_on_owner_id"
+    t.index ["parent_account_id"], name: "index_accounts_on_parent_account_id"
   end
 
   create_table "action_text_embeds", force: :cascade do |t|
@@ -474,6 +477,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_26_094407) do
   add_foreign_key "account_invitations", "users", column: "invited_by_id"
   add_foreign_key "account_users", "accounts"
   add_foreign_key "account_users", "users"
+  add_foreign_key "accounts", "accounts", column: "parent_account_id"
   add_foreign_key "accounts", "users", column: "owner_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "api_tokens", "users"

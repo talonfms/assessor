@@ -31,6 +31,34 @@
     </div>
   </div>
 
+  <% if form.object.parent_account_id.nil? %>
+    <div class="form-group">
+      <label>
+      <%= form.check_box :is_parent %> <%= t('accounts.edit.is_parent') %>
+      </label>
+    </div>
+  <% end %>
+
+<% if form.object.parent_account_id.nil? && !form.object.is_parent %>
+    <div class="form-group">
+      <label>
+        <p><%= t('or') %></p>
+      </label>
+    </div>
+  <% end %>
+
+  <% if !form.object.is_parent %>
+    <div class="form-group">
+      <%= form.label :parent_account_id, t('accounts.edit.parent_account') %>
+      <%= form.collection_select :parent_account_id, 
+                                @parent_accounts, 
+                                :id, 
+                                :name, 
+                                { include_blank: t('accounts.edit.select_parent') }, 
+                                { class: "form-control" } %>
+    </div>
+  <% end %>
+
   <div class="flex justify-between form-group">
     <%= form.button class: "btn btn-primary" %>
 
