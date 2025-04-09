@@ -2,6 +2,7 @@ class AccountsController < Accounts::BaseController
   before_action :authenticate_user!
   before_action :check_admin
   before_action :set_account, only: [:show, :edit, :update, :destroy, :switch]
+  before_action :set_parent_accounts, only: [:new, :edit]
   before_action :require_account_admin, only: [:edit, :update, :destroy]
   before_action :prevent_personal_account_deletion, only: [:destroy]
 
@@ -97,9 +98,13 @@ class AccountsController < Accounts::BaseController
     @account = current_user.accounts.find(params[:id])
   end
 
-  # Only allow a trusted parameter "white list" through.
+  def set_parent_accounts
+    @parent_accounts = Account.where(is_parent: true)
+  end
+
+  # Only allow a trusted parameter "allow list" through.
   def account_params
-    attributes = [:name, :avatar]
+    attributes = [:name, :avatar, :is_parent, :parent_account_id]
     attributes << :domain if Jumpstart::Multitenancy.domain?
     attributes << :subdomain if Jumpstart::Multitenancy.subdomain?
     params.require(:account).permit(*attributes)
