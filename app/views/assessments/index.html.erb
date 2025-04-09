@@ -5,27 +5,45 @@
     <div>
       <h1 class="h3"><%= t('assessments.index.assessments') %></h1>
       <div class="text-sm font-medium">
-        <span class="text-gray-500 dark:text-gray-300/75">Sort by:</span>
-        <%= sortable @assessments, :name, "Name", class: "text-gray-700 dark:text-gray-300 mr-1" %>
-        <%= sortable @assessments, :created_at, "Created", class: "text-gray-700 dark:text-gray-300 mr-1" %>
+        <% if !current_account.is_parent? %>
+          <span class="text-gray-500 dark:text-gray-300/75">Sort by:</span>
+          <%= sortable @assessments, :name, "Name", class: "text-gray-700 dark:text-gray-300 mr-1" %>
+          <%= sortable @assessments, :created_at, "Created", class: "text-gray-700 dark:text-gray-300 mr-1" %>
+        <% end %>
       </div>
     </div>
-    <% if Current.account_user&.admin? %>
+    <% if Current.account_user&.admin? && !current_account.is_parent? %>
       <%= link_to t("scaffold.new.title", model: "Assessment"), new_assessment_path, class: "btn btn-secondary" %>
     <% end %>
   </div>
-  <%= tag.div id: ("assessments" if first_page?), class: "bg-white dark:bg-gray-900 dark:border dark:border-gray-700 rounded-md shadow p-6 space-y-8" do %>
-    <%= render partial: "assessments/assessment_preview", collection: @assessments, as: :assessment, cached: true %>
-    <% if Current.account_user&.admin? %>
-      <div class="hidden only:block text-center">
-        <p class="mb-4 h3"><%= t('assessments.index.create_assessment') %></p>
-        <%= link_to t("scaffold.new.title", model: "Assessment"), new_assessment_path, class: "btn btn-primary" %>
-      </div>
+
+  <% if current_account.is_parent? %>
+    <% current_account.child_accounts.each do |child_account| %>
+      <% child_assessments = child_account.assessments %>
+      <% if child_assessments.any? %>
+        <div class="mb-8">
+          <h2 class="text-xl font-semibold mb-4"><%= child_account.name %></h2>
+          <div class="bg-white dark:bg-gray-900 dark:border dark:border-gray-700 rounded-md shadow p-6 space-y-8">
+            <%= render partial: "assessments/assessment_preview", collection: child_assessments, as: :assessment, cached: true %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= tag.div id: ("assessments" if first_page?), class: "bg-white dark:bg-gray-900 dark:border dark:border-gray-700 rounded-md shadow p-6 space-y-8" do %>
+      <%= render partial: "assessments/assessment_preview", collection: @assessments, as: :assessment, cached: true %>
+      <% if Current.account_user&.admin? && !current_account.is_parent? %>
+        <div class="hidden only:block text-center">
+          <p class="mb-4 h3"><%= t('assessments.index.create_assessment') %></p>
+          <%= link_to t("scaffold.new.title", model: "Assessment"), new_assessment_path, class: "btn btn-primary" %>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
+
   <% if @pagy.pages > 1 %>
     <div class="my-6 text-center">
-      <%== pagy_nav(@pagy) %>
+      <%= pagy_nav(@pagy) %>
     </div>
   <% end %>
 </div>
