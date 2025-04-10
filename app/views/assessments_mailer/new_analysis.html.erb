@@ -2,4 +2,4 @@
 <p><%= t('mailers.assessments_mailer.new_analysis.body') %></p>
 <%= link_to I18n.t('assessments.preview.view'), assessment_url(@assessment), class: "btn btn-secondary" %>
 <p><%= t('mailers.shared.regards') %>,</p>
-<p><%= render "shared/mailers/sign_off" %></p>
+<p><%= render "shared/mailers/sign_off", account: @parent_account %></p>

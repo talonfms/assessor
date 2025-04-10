@@ -1,4 +1,24 @@
 module ImagesHelper
+  def render_logo(options = {})
+    classes = options[:class] || "h-10 w-auto"
+
+    logo_to_display = if current_account&.is_parent? && current_account.logo.attached?
+      current_account.logo
+    elsif current_account&.parent_account&.logo&.attached?
+      current_account.parent_account.logo
+    end
+
+    if logo_to_display
+      image_tag logo_to_display,
+        alt: logo_to_display.record.name,
+        class: classes
+    else
+      image_tag "zivio_logo.png",
+        alt: "Zivio",
+        class: classes
+    end
+  end
+
   def render_svg(name, options = {})
     options[:title] ||= name.underscore.humanize
     options[:aria] = true

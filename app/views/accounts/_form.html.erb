@@ -31,6 +31,19 @@
     </div>
   </div>
 
+  <% if form.object.is_parent? %>
+    <div class="form-group">
+      <%= form.label :logo %>
+
+      <div class="flex items-center gap-4">
+        <%= account_logo form.object %>
+        <div>
+          <%= form.file_field :logo, accept: "image/*", class: "file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-50 file:text-gray-700 hover:file:bg-gray-100" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
   <% if form.object.parent_account_id.nil? %>
     <div class="form-group">
       <label>
