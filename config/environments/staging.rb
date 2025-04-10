@@ -60,6 +60,9 @@ Rails.application.configure do
   # Set host to be used by links generated in mailer templates.
   config.action_mailer.default_url_options = {host: "https://zivio-assessor-staging-43af1f348725.herokuapp.com/"}
 
+  # config.action_mailer.asset_host = "https://zivio-assessor-staging-43af1f348725.herokuapp.com/"
+  # config.action_controller.asset_host = "https://zivio-assessor-staging-43af1f348725.herokuapp.com/"
+
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
   config.action_mailer.smtp_settings = {
     address: ENV["SMTP_HOST"],

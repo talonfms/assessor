@@ -1,6 +1,6 @@
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
-  get "serve/:signed_id/*filename", to: "proxy#show", as: :proxy_attachment
+  get "serve/:signed_id/", to: "proxy#show", as: :proxy_attachment
   namespace :public, path: "p" do
     resources :survey_responses, param: :token, only: [:show, :create], path: "responses" do
       get :thank_you, on: :member

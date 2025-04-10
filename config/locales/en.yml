@@ -642,7 +642,8 @@ en:
   mailers:
     shared:
       regards: "Regards"
-      sign_off: "The Zivio Team"
+      sign_off: "The %{account} Team"
+      from: "%{account} <notifications@zivio.net>"
     assessments_mailer:
       new_analysis:
         subject: "New analysis available for your assessment"
