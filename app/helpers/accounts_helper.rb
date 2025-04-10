@@ -27,6 +27,22 @@ module AccountsHelper
     end
   end
 
+  def account_logo(account, options = {})
+    size = options[:size] || 48
+    classes = options[:class]
+
+    if account.logo.attached?
+      image_tag(
+        account.logo.variant(resize_to_fit: [size, size]),
+        class: classes,
+        alt: account.name
+      )
+    else
+      content = tag.span(account.name.to_s.first, class: "initials")
+      tag.span(content, class: "avatar bg-primary-500 w-8 h-8 #{classes}")
+    end
+  end
+
   def account_user_roles(account, account_user)
     roles = []
     roles << "Owner" if account_user.respond_to?(:user_id) && account.owner_id == account_user.user_id

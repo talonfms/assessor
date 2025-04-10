@@ -22,6 +22,7 @@ class Account < ApplicationRecord
   scope :sorted, -> { order(personal: :desc, name: :asc) }
 
   has_one_attached :avatar
+  has_one_attached :logo
 
   validates :avatar, resizable_image: true
   validates :name, presence: true

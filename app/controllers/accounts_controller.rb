@@ -104,7 +104,7 @@ class AccountsController < Accounts::BaseController
 
   # Only allow a trusted parameter "allow list" through.
   def account_params
-    attributes = [:name, :avatar, :is_parent, :parent_account_id]
+    attributes = [:name, :avatar, :is_parent, :parent_account_id, :logo]
     attributes << :domain if Jumpstart::Multitenancy.domain?
     attributes << :subdomain if Jumpstart::Multitenancy.subdomain?
     params.require(:account).permit(*attributes)
