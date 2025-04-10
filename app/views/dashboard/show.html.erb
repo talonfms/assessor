@@ -1,12 +1,16 @@
 <div class="container mx-auto p-4">
   <div class="my-8">
     <div class="flex items-center justify-between mb-4">
-      <h1><%= current_account.name %> - <%= t(".title") %></h1>
-      <% if Current.account_user&.admin? && current_account.assessments&.blank? %>
+      <% if current_account.is_parent? %>
+        <h1><%= t('dashboard.show.all_assessments') %></h1>
+      <% else %>
+        <h1><%= current_account.name %> - <%= t(".title") %></h1>
+      <% end %>
+      <% if Current.account_user&.admin? && current_account.assessments&.blank? && !current_account.is_parent? %>
       <%= link_to t("scaffold.new.title", model: "Assessment"), new_assessment_path, class: "btn btn-secondary" %>
       <% end %>
     </div>
-    <% if Current.account_user&.admin? && current_account.assessments&.blank? %>
+    <% if Current.account_user&.admin? && current_account.assessments&.blank? && !current_account.is_parent? %>
     <div class="bg-white dark:bg-gray-900 dark:border dark:border-gray-700 rounded-md shadow p-6 space-y-8">
       <div class="block text-center">
         <p class="mb-4 h3"><%= t('assessments.index.create_assessment') %></p>
@@ -14,19 +18,45 @@
       </div>
     </div>
     <% end %>
-    <table class="w-full my-4">
-      <tbody>
-        <% current_account.assessments.each do | assessment | %>
-          <tr class="border-t border-gray-100 dark:border-gray-800 group">
-            <td class="p-3">
-              <%= link_to assessment, class:"flex items-center" do %>
-                <span class="text-gray-900 dark:text-gray-100 font-semibold text-sm no-underline hover:text-primary-500 dark:hover:text-primary-500"><%= assessment.name %></span>
-                <%= assessment_label(assessment, classes: "ml-2") %>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <% if current_account.is_parent? %>
+      <% current_account.child_accounts.each do |child_account| %>
+        <div class="mb-6">
+          <h2 class="text-xl font-bold mb-3"><%= child_account.name %></h2>
+          <% if child_account.assessments.any? %>
+            <table class="w-full my-2">
+              <tbody>
+                <% child_account.assessments.each do |assessment| %>
+                  <tr class="border-t border-gray-100 dark:border-gray-800 group">
+                    <td class="p-3">
+                      <%= link_to assessment, class:"flex items-center" do %>
+                        <span class="text-gray-900 dark:text-gray-100 font-semibold text-sm no-underline hover:text-primary-500 dark:hover:text-primary-500"><%= assessment.name %></span>
+                        <%= assessment_label(assessment, classes: "ml-2") %>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            <p class="text-gray-500 italic">No assessments</p>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <% current_account.assessments.each do | assessment | %>
+        <table class="w-full">
+          <tbody>
+            <tr class="border-t border-gray-100 dark:border-gray-800 group">
+              <td class="p-3">
+                <%= link_to assessment, class:"flex items-center" do %>
+                  <span class="text-gray-900 dark:text-gray-100 font-semibold text-sm no-underline hover:text-primary-500 dark:hover:text-primary-500"><%= assessment.name %></span>
+                  <%= assessment_label(assessment, classes: "ml-2") %>
+                <% end %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    <% end %>
   </div>
 </div>

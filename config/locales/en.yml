@@ -201,6 +201,7 @@ en:
   dashboard:
     show:
       title: "Assessments"
+      all_assessments: "All Assessments"
 
   assessments:
     index:

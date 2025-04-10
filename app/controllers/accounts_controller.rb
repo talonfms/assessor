@@ -99,7 +99,7 @@ class AccountsController < Accounts::BaseController
   end
 
   def set_parent_accounts
-    @parent_accounts = Account.where(is_parent: true)
+    @parent_accounts = current_user.accounts.where(is_parent: true)
   end
 
   # Only allow a trusted parameter "allow list" through.
