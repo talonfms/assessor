@@ -15,11 +15,9 @@ module ImagesHelper
         class: classes
     else
       # Fallback to default Zivio logo when no account logo is available
-      inline_svg_tag("logo.svg",
-        title: "Zivio",
-        aria: true,
-        nocomment: true,
-        class: default_logo_class)
+      image_tag "zivio_logo.png",
+        alt: "Zivio",
+        class: classes
     end
   end
 
