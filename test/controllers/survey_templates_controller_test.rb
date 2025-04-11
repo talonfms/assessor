@@ -6,6 +6,7 @@ class SurveyTemplatesControllerTest < ActionDispatch::IntegrationTest
     @account = accounts(:one)
     sign_in_as_admin(@user, @account)
     @survey_template = survey_templates(:one)
+    @account.update!(is_parent: true)
   end
 
   test "should get index" do
