@@ -612,6 +612,7 @@ en:
   errors:
     messages:
       image_format_not_supported: "image format not supported"
+      not_authorized: "You are not authorized to access this page."
 
   helpers:
     label:

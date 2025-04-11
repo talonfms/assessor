@@ -3,6 +3,6 @@
 <% if user_signed_in? %>
   <%= nav_link_to "Assessments", assessments_path, class: "nav-link", starts_with: assessments_path %>
 <% end %>
-<% if Current.account_user&.admin? %>
+<% if Current.account_user&.admin? && current_account.is_parent? %>
 <%= nav_link_to "Survey Templates", survey_templates_path, class: "nav-link", starts_with: survey_templates_path %>
 <% end %>

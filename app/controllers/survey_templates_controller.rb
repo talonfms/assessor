@@ -1,6 +1,7 @@
 class SurveyTemplatesController < ApplicationController
   before_action :set_survey_template, only: [:show, :edit, :update, :destroy]
   before_action :check_admin
+  before_action :check_is_parent_account
 
   # GET /survey_templates
   def index
@@ -86,7 +87,13 @@ class SurveyTemplatesController < ApplicationController
   def check_admin
     return true if Current.account_user&.admin?
 
-    redirect_to assessments_path
+    redirect_to assessments_path, alert: I18n.t("errors.messages.not_authorized")
+  end
+
+  def check_is_parent_account
+    return true if current_account&.is_parent?
+
+    redirect_to assessments_path, alert: I18n.t("errors.messages.not_authorized")
   end
 
   # Use callbacks to share common setup or constraints between actions.

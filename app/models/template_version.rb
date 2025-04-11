@@ -13,6 +13,16 @@ class TemplateVersion < ApplicationRecord
   scope :unlocked, -> { where(locked_at: nil) }
   scope :latest_first, -> { order(version_number: :desc) }
 
+  scope :for_parent_account, ->(account) {
+    return none unless account
+
+    if account.is_parent?
+      joins(survey_template: :account).where(accounts: {parent_id: account.id})
+    else
+      joins(survey_template: :account).where(accounts: {id: account.parent_account_id})
+    end
+  }
+
   def locked?
     locked_at.present?
   end
