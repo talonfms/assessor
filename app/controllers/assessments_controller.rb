@@ -113,7 +113,14 @@ class AssessmentsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_assessment
-    @assessment = current_account.assessments.find(params[:id])
+    if current_account.is_parent?
+      child_account_ids = current_account.child_accounts.pluck(:id)
+      account_ids = [current_account.id] + child_account_ids
+
+      @assessment = Assessment.unscoped.where(account_id: account_ids).find(params[:id])
+    else
+      @assessment = current_account.assessments.find(params[:id])
+    end
 
     # Uncomment to authorize with Pundit
     # authorize @assessment
