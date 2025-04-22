@@ -23,6 +23,7 @@
       <% if child_assessments.any? %>
         <div class="mb-8">
           <h2 class="text-xl font-semibold mb-4"><%= child_account.name %></h2>
+          <%= button_to I18n.t('assessments.preview.view_account'), switch_account_path(child_account), method: :patch, class: "btn btn-secondary" %>
           <div class="bg-white dark:bg-gray-900 dark:border dark:border-gray-700 rounded-md shadow p-6 space-y-8">
             <%= render partial: "assessments/assessment_preview", collection: child_assessments, as: :assessment, cached: true %>
           </div>
