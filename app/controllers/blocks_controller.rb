@@ -21,10 +21,10 @@ class BlocksController < ApplicationController
       current_block_group.present? ? current_block_group.blocks.maximum(:position).to_i + 1 : @template_version.blocks.ungrouped.maximum(:position).to_i + 1
     end
     @block = @template_version.blocks.new(block_params.merge(position: next_position, required: "0", button_text: "Next",
-      question: "How are you doing?", block_group_id: current_block_group&.id))
+      question: "Who manages your services procurement?", block_group_id: current_block_group&.id))
     @block.apply_default_options
     if @block.save
-      redirect_to edit_survey_template_path(@survey_template, block_id: @block.id)
+      redirect_to survey_template_template_version_path(@survey_template, @template_version, block_id: @block.id)
     else
       render json: {success: false, errors: @block.errors.full_messages}, status: :unprocessable_entity
     end
@@ -64,7 +64,7 @@ class BlocksController < ApplicationController
   end
 
   def set_block
-    @block = @template_version.blocks.find(params[:id])
+    @block = @template_version.blocks.find(params[:block_id]) if params[:block_id].present?
   end
 
   def ensure_admin

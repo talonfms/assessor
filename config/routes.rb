@@ -46,15 +46,17 @@ Rails.application.routes.draw do
 
   authenticated :user do
     root to: "dashboard#show", as: :user_root
-    resources :survey_templates
-    resources :template_versions do
-      resources :blocks, except: %i[index show] do
-        member do
-          post :reorder
+    resources :survey_templates do
+      resources :template_versions, only: [:create, :show] do
+        resources :blocks, except: %i[index show], param: :block_id do
+          member do
+            post :reorder
+          end
         end
+        resources :block_groups, only: [:create]
       end
-      resources :block_groups, only: [:create]
     end
+
     resources :block_options, only: %i[create new update destroy]
     resources :assessments do
       member do

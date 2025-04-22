@@ -1,5 +1,5 @@
-<div data-sortable-update-url="<%= template_version_block_path(block.template_version, block) %>">
-  <%= link_to edit_survey_template_path(block.template_version.survey_template, block_id: block.id), class: "flex items-center justify-start bg-pink-200 p-2 rounded mb-2 ring-1 ring-inset ring-gray-500/10 group hover:bg-pink-300 transition-colors", data: { controller: "tooltip", tippy_content: block.question, tippy_delay: "0", tippy_arrow: "true", tippy_size: "regular", tippy_animation: "fade" } do %>
+<div data-sortable-update-url="<%= survey_template_template_version_block_path(block.template_version.survey_template, block.template_version, block) %>">
+  <%= link_to survey_template_template_version_path(block.template_version.survey_template, block.template_version, block_id: block.id), class: "flex items-center justify-start bg-pink-200 p-2 rounded mb-2 ring-1 ring-inset ring-gray-500/10 group hover:bg-pink-300 transition-colors", data: { controller: "tooltip", tippy_content: block.question, tippy_delay: "0", tippy_arrow: "true", tippy_size: "regular", tippy_animation: "fade" } do %>
     <span class="handle"><%= block_icon(block, class: "h-3 w-3 mr-1") %></span>
     <span class="truncate mr-2"><%= block.question %></span>
   <% end %>

@@ -470,9 +470,18 @@ en:
       stripe:
         credit_or_debit_card: "Credit or debit card"
 
+  survey_templates:
+    show:
+      create_new_version: "Create new version"
+
   template_versions:
     template_version:
       click_to_copy: "Click to copy"
+      template_version: "Template Version"
+    create:
+      notes: "Version #%{version_number}"
+    show:
+      in_progress_assessments: "Creating a new survey template version will not adjust any assessments that are currently in progress."
 
   account:
     passwords:
