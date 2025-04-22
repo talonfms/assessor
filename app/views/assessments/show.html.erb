@@ -11,7 +11,9 @@
     <% if Current.account_user&.admin? && @assessment.submitted? && @assessment.export_bundle&.completed? %>
       <%= link_to I18n.t('assessments.preview.download'), download_bundle_assessment_path(@assessment), method: :get, class: "btn btn-secondary" %>
     <% end %>
-    <%= link_to t("edit"), edit_assessment_path(@assessment), class: "btn btn-secondary" %>
+    <% if Current.account_user&.admin? %>
+      <%= link_to t("edit"), edit_assessment_path(@assessment), class: "btn btn-secondary" %>
+    <% end %>
     </div>
   </div>
   <div>
