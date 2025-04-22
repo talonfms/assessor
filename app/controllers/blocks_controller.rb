@@ -20,8 +20,8 @@ class BlocksController < ApplicationController
     else
       current_block_group.present? ? current_block_group.blocks.maximum(:position).to_i + 1 : @template_version.blocks.ungrouped.maximum(:position).to_i + 1
     end
-    @block = @template_version.blocks.new(block_params.merge(position: next_position, required: "0", button_text: "Next",
-      question: "Who manages your services procurement?", block_group_id: current_block_group&.id))
+    @block = @template_version.blocks.new(block_params.merge(position: next_position, required: "0", button_text: I18n.t("next"),
+      question: I18n.t("blocks.create.question"), block_group_id: current_block_group&.id))
     @block.apply_default_options
     if @block.save
       redirect_to survey_template_template_version_path(@survey_template, @template_version, block_id: @block.id)

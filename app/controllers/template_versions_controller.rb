@@ -1,11 +1,11 @@
 class TemplateVersionsController < ApplicationController
-  before_action :set_survey_template, only: [:create, :show]
+  before_action :set_survey_template
   before_action :check_admin
   before_action :check_is_parent_account
 
   def create
     @template_version = @survey_template.template_versions.build(params[:notes])
-    @template_version.blocks = @latest_version.blocks
+    @template_version.blocks = @latest_version.blocks.map(&:deep_dup) if @latest_version.blocks.present?
     @template_version.created_by = current_user
     @template_version.version_number = @latest_version.version_number + 1
     @template_version.notes = I18n.t("template_versions.create.notes", version_number: @template_version.version_number)
@@ -24,6 +24,10 @@ class TemplateVersionsController < ApplicationController
 
   def show
     flash[:notice] = I18n.t("template_versions.show.in_progress_assessments") if @template_version.version_number > 1
+  end
+
+  def preview
+    @survey_response = SurveyResponse.new
   end
 
   private

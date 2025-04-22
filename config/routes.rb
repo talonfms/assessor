@@ -48,6 +48,9 @@ Rails.application.routes.draw do
     root to: "dashboard#show", as: :user_root
     resources :survey_templates do
       resources :template_versions, only: [:create, :show] do
+        member do
+          get :preview
+        end
         resources :blocks, except: %i[index show], param: :block_id do
           member do
             post :reorder
