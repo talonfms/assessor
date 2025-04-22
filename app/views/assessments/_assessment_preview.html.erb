@@ -7,7 +7,7 @@
     <p class="text-sm font-medium text-gray-500">Created</p>
     <%= l assessment.created_at, format: :long %>
   </div>
-  <% if action_name != "show" %>
+  <% if action_name != "show" && !current_account.is_parent? %>
     <%= link_to I18n.t('assessments.preview.view'), assessment, class: "btn btn-secondary" %>
   <% end %>
   <% if Current.account_user&.admin? && assessment.submitted? && assessment.export_bundle&.completed? %>

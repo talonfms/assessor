@@ -223,6 +223,7 @@ en:
       assessment_completed: "Assessment completed"
     preview:
       view: "View this assessment"
+      view_account: "View this account"
       download: "Download submissions"
     download_analysis:
       no_file: "No file available for download."

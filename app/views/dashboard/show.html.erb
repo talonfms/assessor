@@ -28,9 +28,14 @@
                 <% child_account.assessments.each do |assessment| %>
                   <tr class="border-t border-gray-100 dark:border-gray-800 group">
                     <td class="p-3">
-                      <%= link_to assessment, class:"flex items-center" do %>
-                        <span class="text-gray-900 dark:text-gray-100 font-semibold text-sm no-underline hover:text-primary-500 dark:hover:text-primary-500"><%= assessment.name %></span>
-                        <%= assessment_label(assessment, classes: "ml-2") %>
+                      <% if current_account.is_parent? %>
+                        <span class="text-gray-900 dark:text-gray-100 font-semibold text-sm no-underline"><%= assessment.name %></span>
+                        <%= assessment_label(assessment, classes: 'ml-2') %>
+                      <% else %>
+                        <%= link_to assessment, class:"flex items-center" do %>
+                          <span class="text-gray-900 dark:text-gray-100 font-semibold text-sm no-underline hover:text-primary-500 dark:hover:text-primary-500"><%= assessment.name %></span>
+                          <%= assessment_label(assessment, classes: "ml-2") %>
+                        <% end %>
                       <% end %>
                     </td>
                   </tr>
