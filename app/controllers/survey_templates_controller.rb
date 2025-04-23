@@ -39,7 +39,7 @@ class SurveyTemplatesController < ApplicationController
       # authorize @survey_template
       if @survey_template.save
         respond_to do |format|
-          format.html { redirect_to @survey_template, notice: "Survey template was successfully created." }
+          format.html { redirect_to @survey_template, notice: I18n.t("survey_templates.create.successfully_created") }
           format.json { render :show, status: :created, location: @survey_template }
         end
       else

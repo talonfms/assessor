@@ -483,6 +483,8 @@ en:
       description: "Description"
       template_versions: "Template Versions"
       created: "created:"
+    create:
+      successfully_created: "Survey template was successfully created."
 
   template_versions:
     template_version:
