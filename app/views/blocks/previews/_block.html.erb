@@ -1,5 +1,5 @@
 <div id="<%= dom_id(block, "preview") %>">
-  <%= form_with(model: [template_version, block], local: false ) do |form| %>
+  <%= form_with(model: Block.new, url: survey_template_template_version_blocks_path(template_version.survey_template, template_version), local: false ) do |form| %>
     <%= render "blocks/previews/#{block.block_type}", form: form, block: block %>
     <%= form.button class: "btn btn-primary d-inline-flex justify-content-center align-items-center", disabled: true do %>
       <span><%= block.button_text%> <svg style="display:inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">

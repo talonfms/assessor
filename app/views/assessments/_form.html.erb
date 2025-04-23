@@ -24,7 +24,9 @@
       <% end %>
         <div class="input-group">
           <%= form.collection_select :template_version_id, 
-          TemplateVersion.for_parent_account(current_account), 
+          TemplateVersion.joins(:survey_template)
+          .for_parent_account(current_account)
+          .order('survey_templates.name ASC, template_versions.version_number DESC'),
           :id, 
           ->template_version { "#{template_version.survey_template.name} - #{template_version.notes}" },
           { class: "form-control", data: { action: "auto-submit#submit" } } %>

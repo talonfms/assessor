@@ -98,7 +98,7 @@
                               <img src="https://app.youform.com/images/blocks/text.png" class="border-4 rounded-md border-gray-200 my-6" alt="Statement block">
                             </div>
                             <div>
-                              <%= form_with(model: [template_version, Block.new]) do | form |%>
+                              <%= form_with(model: Block.new, url: survey_template_template_version_blocks_path(template_version.survey_template, template_version)) do |form| %>
                                 <%= form.hidden_field :block_type, value: :statement %>
                                 <%= hidden_field_tag :block_id, @block&.id %>
                                 <%= form.submit "Use this block", class: "cursor-pointer flex items-center bg-gray-700 hover:bg-gray-800 text-white block max-w-sm mx-auto my-8 text-center px-14 py-2 rounded-md"%>
@@ -113,7 +113,7 @@
                               Use this for short answers, such as Name, Email Address, or any other short text answer.
                             </p>
                             <div>
-                              <%= form_with(model: [template_version, Block.new]) do | form |%>
+                              <%= form_with(model: Block.new, url: survey_template_template_version_blocks_path(template_version.survey_template, template_version)) do |form| %>
                                 <%= form.hidden_field :block_type, value: :short_text %>
                                 <%= hidden_field_tag :block_id, @block&.id %>
                                 <%= form.submit "Use this block", class: "cursor-pointer flex items-center bg-gray-700 hover:bg-gray-800 text-white block max-w-sm mx-auto my-8 text-center px-14 py-2 rounded-md"%>
@@ -132,7 +132,7 @@
                               <img src="https://app.youform.com/images/blocks/textarea.png" class="border-4 rounded-md border-gray-200 my-6" alt="Statement block">
                             </div>
                             <div>
-                              <%= form_with(model: [template_version, Block.new]) do | form |%>
+                              <%= form_with(model: Block.new, url: survey_template_template_version_blocks_path(template_version.survey_template, template_version)) do |form| %>
                                 <%= form.hidden_field :block_type, value: :long_text %>
                                 <%= hidden_field_tag :block_id, @block&.id %>
                                 <%= form.submit "Use this block", class: "cursor-pointer flex items-center bg-gray-700 hover:bg-gray-800 text-white block max-w-sm mx-auto my-8 text-center px-14 py-2 rounded-md"%>
@@ -147,7 +147,7 @@
                               Single Select Option blocks are used in questions where multiple options are presented to users but they can choose only one out of many.
                             </p>
                             <div>
-                              <%= form_with(model: [template_version, Block.new]) do | form |%>
+                              <%= form_with(model: Block.new, url: survey_template_template_version_blocks_path(template_version.survey_template, template_version)) do |form| %>
                                 <%= form.hidden_field :block_type, value: :single_select %>
                                 <%= hidden_field_tag :block_id, @block&.id %>
                                 <%= form.submit "Use this block", class: "cursor-pointer flex items-center bg-gray-700 hover:bg-gray-800 text-white block max-w-sm mx-auto my-8 text-center px-14 py-2 rounded-md"%>
@@ -165,7 +165,7 @@
                               <img src="https://app.youform.com/images/blocks/checkbox.png" class="border-4 rounded-md border-gray-200 my-6" alt="Statement block">
                             </div>
                             <div>
-                              <%= form_with(model: [template_version, Block.new]) do | form |%>
+                              <%= form_with(model: Block.new, url: survey_template_template_version_blocks_path(template_version.survey_template, template_version)) do |form| %>
                                 <%= form.hidden_field :block_type, value: :multiple_select %>
                                 <%= hidden_field_tag :block_id, @block&.id %>
                                 <%= form.submit "Use this block", class: "cursor-pointer flex items-center bg-gray-700 hover:bg-gray-800 text-white block max-w-sm mx-auto my-8 text-center px-14 py-2 rounded-md"%>

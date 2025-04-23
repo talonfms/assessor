@@ -35,6 +35,7 @@ en:
   create_an_account_first: "Please create an account first."
   delete: "Delete"
   edit: "Edit"
+  next: "Next"
   view: "View"
   must_be_an_admin: "You must be an admin to do that."
   processing: "Processing..."
@@ -245,6 +246,10 @@ en:
     microsoft_graph: "Microsoft"
     stripe: "Stripe"
     twitter: "Twitter"
+
+  blocks:
+    create:
+      question: "Who manages your services procurement?"
 
   payments:
     success: "Thanks for subscribing!"
@@ -470,9 +475,25 @@ en:
       stripe:
         credit_or_debit_card: "Credit or debit card"
 
+  survey_templates:
+    show:
+      create_new_version: "Create new version"
+      add_questions: "Add Questions"
+      name: "Name"
+      description: "Description"
+      template_versions: "Template Versions"
+      created: "created:"
+    create:
+      successfully_created: "Survey template was successfully created."
+
   template_versions:
     template_version:
       click_to_copy: "Click to copy"
+      template_version: "Template Version"
+    create:
+      notes: "Version #%{version_number}"
+    show:
+      in_progress_assessments: "Creating a new survey template version will not adjust any assessments that are currently in progress."
 
   account:
     passwords:
