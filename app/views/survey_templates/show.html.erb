@@ -8,7 +8,11 @@
       <span class="text-gray-400 font-light mx-2">\</span>
       Survey Template #<%= @survey_template.id %>
     </h1>
-    <%= button_to t("survey_templates.show.create_new_version"), survey_template_template_versions_path(@survey_template), method: :post, class: "btn btn-secondary" %>
+    <% if @survey_template.template_versions.empty? %>
+      <%= button_to t("survey_templates.show.add_questions"), survey_template_template_versions_path(@survey_template), method: :post, class: "btn btn-secondary" %>
+    <% else %>
+      <%= button_to t("survey_templates.show.create_new_version"), survey_template_template_versions_path(@survey_template), method: :post, class: "btn btn-secondary" %>
+    <% end %>
   </div>
 
   <div class="p-8 bg-white dark:bg-gray-900 dark:border dark:border-gray-700 rounded shadow">

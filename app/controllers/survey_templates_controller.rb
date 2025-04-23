@@ -38,18 +38,9 @@ class SurveyTemplatesController < ApplicationController
       # Uncomment to authorize with Pundit
       # authorize @survey_template
       if @survey_template.save
-        @template_version = @survey_template.template_versions.build(
-          version_number: 1,
-          created_by: current_user,
-          notes: "Initial version"
-        )
         respond_to do |format|
-          if @template_version.save
-            format.html { redirect_to @survey_template, notice: "Survey template was successfully created." }
-            format.json { render :show, status: :created, location: @survey_template }
-          else
-            raise ActiveRecord::Rollback
-          end
+          format.html { redirect_to @survey_template, notice: "Survey template was successfully created." }
+          format.json { render :show, status: :created, location: @survey_template }
         end
       else
         respond_to do |format|

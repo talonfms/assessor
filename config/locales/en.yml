@@ -478,6 +478,7 @@ en:
   survey_templates:
     show:
       create_new_version: "Create new version"
+      add_questions: "Add Questions"
       name: "Name"
       description: "Description"
       template_versions: "Template Versions"

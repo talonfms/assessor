@@ -4,13 +4,17 @@
     <%= survey_template.name %>
   </div>
   <div class="mb-4">
-    <p class="text-sm font-medium text-gray-500"><%= t("survey_templates.show.description") %></p>
-    <%= survey_template.description %>
+    <% if survey_template.description? %>
+      <p class="text-sm font-medium text-gray-500"><%= t("survey_templates.show.description") %></p>
+    <% end %>
+      <%= survey_template.description %>
   </div>
   <% if action_name != "show" %>
     <%= link_to "View this survey template", survey_template, class: "btn btn-secondary" %>
   <% else %>
+  <% if survey_template.template_versions.present? %>
     <p class="text-sm font-medium text-gray-500"><%= t("survey_templates.show.template_versions") %></p>
+  <% end %>
     <% survey_template.template_versions.each do |tv| %>
       <div>
         <%= link_to preview_survey_template_template_version_path(tv.survey_template, tv) do %>

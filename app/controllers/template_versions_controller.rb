@@ -4,12 +4,30 @@ class TemplateVersionsController < ApplicationController
   before_action :check_is_parent_account
 
   def create
-    @template_version = @survey_template.template_versions.build(params[:notes])
-    @template_version.blocks = @latest_version.blocks.map(&:deep_dup) if @latest_version.blocks.present?
-    @template_version.created_by = current_user
-    @template_version.version_number = @latest_version.version_number + 1
-    @template_version.notes = I18n.t("template_versions.create.notes", version_number: @template_version.version_number)
-    @blocks = @template_version.blocks
+    @template_version = if @latest_version.present?
+      @survey_template.template_versions.build(notes: I18n.t("template_versions.create.notes", version_number: @latest_version.version_number + 1), created_by: current_user, version_number: @latest_version.version_number + 1)
+    else
+      @survey_template.template_versions.build(
+        version_number: 1,
+        created_by: current_user,
+        notes: "Initial version"
+      )
+    end
+
+    if @latest_version&.blocks.present?
+      @template_version.blocks = @latest_version.blocks.map do |original_block|
+        new_block = original_block.dup
+
+        if original_block.block_options.present?
+          new_block.block_options = original_block.block_options.map do |option|
+            new_option = option.dup
+            new_option
+          end
+        end
+
+        new_block
+      end
+    end
 
     respond_to do |format|
       if @template_version.save
