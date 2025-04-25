@@ -5,10 +5,10 @@
       <% else %>
         <%= render LabelComponent.new(text: "In Progress", type: :info, classes: "ml-2") %>
       <% end %></h3>
-    <%= render RadialGaugeComponent.new(type: :dynamic, value: sow_check.files.count, max: 10) %>
+    <%= render RadialGaugeComponent.new(type: :dynamic, value: sow_check.files.count, max: sow_check.target_files) %>
   </div>
-  <p class="my-4">Provide SOWs for SOW workers with the longest tenure.</p>
-  <p class="my-4">For the best results please provide 10 documents.</p>
+  <p class="my-4"><%= t('assessments.show.sow_check.provide_sows') %></p>
+  <p class="my-4"><%= t('assessments.show.sow_check.best_results', target_files: sow_check.target_files) %></p>
   <div class="relative overflow-x-auto">
     <table class="w-full text-sm text-left text-gray-500">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50">

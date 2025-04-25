@@ -222,6 +222,17 @@ en:
       download_analysis: "Download Analysis"
       assessment_submitted: "Assessment submitted"
       assessment_completed: "Assessment completed"
+      template_version:
+        survey: "Survey"
+        share_survey: "Share Survey"
+        assess_maturity: "Assess the maturity among enagement managers to the risk elements that SOW engagements present."
+        share: "Please share this short survey with at least %{target_files} engagement managers."
+      sow_check:
+        provide_sows: "Provide SOWs for SOW workers with the longest tenure."
+        best_results: "For the best results please provide %{target_files} document(s)."
+      finance_check:
+        provide_financials: "Provide a small AP or 1099 extract for review. This information will be used for cost benchmarking and process analysis."
+        best_results: "For the best results please provide %{target_files} document(s)."
     preview:
       view: "View this assessment"
       view_account: "View this account"

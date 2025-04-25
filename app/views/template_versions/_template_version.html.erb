@@ -1,12 +1,18 @@
 <div class="ml-4 my-4 p-8 bg-white dark:bg-gray-900 dark:border dark:border-gray-700 rounded shadow">
   <div class="flex justify-between items-center mb-4">
-    <h3>Survey <%= render LabelComponent.new(text: "In Progress", type: :info, classes: "ml-2") %></h3>
-    <%= render RadialGaugeComponent.new(type: :dynamic, value: assessment.survey_responses.count, max: 25) %>
+    <h3><%= t('assessments.show.template_version.survey') %> 
+      <% if assessment.survey_check&.complete? %>
+        <%= render LabelComponent.new(text: "Completed", type: :success, classes: "ml-2") %>
+      <% else %>
+        <%= render LabelComponent.new(text: "In Progress", type: :info, classes: "ml-2") %>
+      <% end %>
+    </h3>
+    <%= render RadialGaugeComponent.new(type: :dynamic, value: assessment.survey_responses.count, max: assessment.survey_check&.target_files)  %>
   </div>
-  <p class="my-4">Assess the maturity among enagement managers to the risk elements that SOW engagements present.</p>
-  <p class="my-4">Please share this short survey with at least 25 engagement managers.</p>
+  <p class="my-4"><%= t("assessments.show.template_version.assess_maturity") %></p>
+  <p class="my-4"><%= t("assessments.show.template_version.share", target_files: assessment.survey_check&.target_files) %></p>
   <div class="mb-4">
-    <div class="mb-2 text-gray-600 text-xs uppercase font-bold">Share Survey</div>
+    <div class="mb-2 text-gray-600 text-xs uppercase font-bold"><%= t('assessments.show.template_version.share_survey') %></div>
     <div class="flex items-center gap-1">
       <%=  public_survey_response_url(assessment.token) %>
       <%= button_tag data: { controller: "clipboard tooltip", tooltip_content_value: t(".click_to_copy"), clipboard_text: public_survey_response_url(assessment.token) } do %>
