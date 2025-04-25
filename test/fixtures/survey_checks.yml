@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  assessment: one
+  account: one
+  status: 1
+  min_required_files: 1
+  target_files: 1
+
+two:
+  assessment: two
+  account: two
+  status: 1
+  min_required_files: 1
+  target_files: 1

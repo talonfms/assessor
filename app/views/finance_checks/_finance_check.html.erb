@@ -7,8 +7,8 @@
       <% end %></h3>
     <%= render RadialGaugeComponent.new(type: :dynamic, value: finance_check.files.count, max: finance_check.target_files) %>
   </div>
-  <p class="my-4">Provide a small AP or 1099 extract for review. This information will be used for cost benchmarking and process analysis.</p>
-  <p class="my-4">For the best results please provide <%= finance_check.target_files %> document(s).</p>
+  <p class="my-4"><%= t('assessments.show.finance_check.provide_financials') %></p>
+  <p class="my-4"><%= t('assessments.show.finance_check.best_results', target_files: finance_check.target_files) %></p>
   <div class="relative overflow-x-auto">
     <table class="w-full text-sm text-left text-gray-500">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50">

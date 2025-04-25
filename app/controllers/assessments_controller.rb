@@ -34,6 +34,7 @@ class AssessmentsController < ApplicationController
     if @assessment.include_finance_check == "1"
       @assessment.build_finance_check
     end
+    @assessment.build_survey_check
     # Uncomment to authorize with Pundit
     # authorize @assessment
 

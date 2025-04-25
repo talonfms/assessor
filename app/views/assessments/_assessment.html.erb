@@ -61,10 +61,16 @@
                     <span class="ml-2">Accounts Payable Extract</span>
                   </p>
                 <% end %>
-                <p class=" flex items-center">
-                  <%= heroicon :empty_circle %>
-                  <span class="ml-2">Survey</span>
-                </p>
+                <% if assessment.survey_check %>
+                  <p class=" flex items-center">
+                    <% if assessment.survey_check&.complete? %>
+                      <%= heroicon :check_circle  %>
+                    <% else %>
+                      <%= heroicon :empty_circle %>
+                    <% end %>
+                    <span class="ml-2">Survey</span>
+                  </p>
+                <% end %>
               </div>
               <div>
                 <% if assessment.submittable? %>
