@@ -26,6 +26,8 @@ class AssessmentsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to assessment_url(Assessment.last)
   end
 
+  # add tests for creating sow_check, finance_check, survey_check
+
   test "should show assessment" do
     get assessment_url(@assessment)
     assert_response :success

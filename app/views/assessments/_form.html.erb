@@ -20,7 +20,7 @@
     </div>
     <div class="form-group">
       <%= form.label :template_version_id do %> 
-        <%= I18n.t('assessments.new.survey_template_version') %> <span style="color: red;">*</span>
+        <%= I18n.t('assessments.new.survey_template_version') %></span>
       <% end %>
         <div class="input-group">
           <%= form.collection_select :template_version_id, 
@@ -29,6 +29,7 @@
           .order('survey_templates.name ASC, template_versions.version_number DESC'),
           :id, 
           ->template_version { "#{template_version.survey_template.name} - #{template_version.notes}" },
+          { include_blank: t('assessments.new.no_survey')},
           { class: "form-control", data: { action: "auto-submit#submit" } } %>
         </div>
     </div>

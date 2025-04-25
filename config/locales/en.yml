@@ -211,6 +211,7 @@ en:
     new:
       name: "Name"
       survey_template_version: "Survey Template Version"
+      no_survey: "No survey"
       default_name: "Services Health Check"
     show:
       assessment_input: "Assessment Input"
