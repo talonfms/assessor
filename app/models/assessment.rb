@@ -13,6 +13,7 @@ class Assessment < ApplicationRecord
   has_one_attached :file
 
   validates :name, presence: true
+  validate :at_least_one_check_present
 
   enum :status, %w[in_progress submitted completed].index_by(&:itself)
   translate_enum :status
@@ -26,5 +27,11 @@ class Assessment < ApplicationRecord
       (survey_check.nil? || survey_check.complete?) &&
       (sow_check.nil? || sow_check.complete?) &&
       (finance_check.nil? || finance_check.complete?)
+  end
+
+  def at_least_one_check_present
+    if survey_check.nil? && sow_check.nil? && finance_check.nil?
+      errors.add(:base, message: I18n.t("activerecord.errors.models.assessment.no_checks"))
+    end
   end
 end

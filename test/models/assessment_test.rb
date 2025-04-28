@@ -5,19 +5,26 @@ class AssessmentTest < ActiveSupport::TestCase
 
   setup do
     @assessment = assessments(:one)
-    @assessment.include_sow_check = true
-    @assessment.include_finance_check = true
   end
   test "submittable" do
+    @assessment.sow_check.update(target_files: 1)
+    @assessment.finance_check.update(target_files: 1)
+    SurveyCheck.create!(assessment: @assessment, target_files: 1, account: @assessment.account)
     @assessment.update!(status: "in_progress")
-    25.times do
-      SurveyResponse.create!(responses: [responses(:one)], assessment: @assessment)
-    end
-    @assessment.sow_check.update!(target_files: 1)
+    SurveyResponse.create!(responses: [responses(:one)], assessment: @assessment)
     attach_file_to_fixture(@assessment.sow_check, :files, "test/fixtures/files/test_pdf.pdf", "application/pdf")
-    @assessment.finance_check.update!(target_files: 1)
     attach_file_to_fixture(@assessment.finance_check, :files, "test/fixtures/files/test_pdf.pdf", "application/pdf")
     @assessment.reload
     assert @assessment.submittable?
+  end
+
+  test "at least one check present" do
+    @assessment.sow_check.destroy
+    @assessment.finance_check.destroy
+    @assessment.survey_check.destroy
+    @assessment.reload
+    @assessment.save
+    assert_not_empty @assessment.errors[:base]
+    assert_equal I18n.t("activerecord.errors.models.assessment.no_checks"), @assessment.errors[:base].first
   end
 end

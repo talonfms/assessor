@@ -26,7 +26,32 @@ class AssessmentsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to assessment_url(Assessment.last)
   end
 
-  # add tests for creating sow_check, finance_check, survey_check
+  test "should create assessment with sow_check" do
+    assert_difference("Assessment.count") do
+      post assessments_url, params: {assessment: {account_id: @assessment.account_id, name: @assessment.name, template_version_id: @assessment.template_version.id, include_sow_check: "1"}}
+    end
+    assert_redirected_to assessment_url(Assessment.last)
+    assessment = Assessment.last
+    assert_not_nil assessment.sow_check
+  end
+
+  test "should create assessment with finance_check" do
+    assert_difference("Assessment.count") do
+      post assessments_url, params: {assessment: {account_id: @assessment.account_id, name: @assessment.name, template_version_id: @assessment.template_version.id, include_finance_check: "1"}}
+    end
+    assert_redirected_to assessment_url(Assessment.last)
+    assessment = Assessment.last
+    assert_not_nil assessment.finance_check
+  end
+
+  test "should create assessment with survey_check" do
+    assert_difference("Assessment.count") do
+      post assessments_url, params: {assessment: {account_id: @assessment.account_id, name: @assessment.name, template_version_id: @assessment.template_version.id}}
+    end
+    assert_redirected_to assessment_url(Assessment.last)
+    assessment = Assessment.last
+    assert_not_nil assessment.survey_check
+  end
 
   test "should show assessment" do
     get assessment_url(@assessment)

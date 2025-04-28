@@ -642,6 +642,8 @@ en:
           attributes:
             admin:
               cannot_be_removed: "role cannot be removed for the account owner"
+        assessment:
+          no_checks: "At least one check type (Survey, Finance, or SOW) must be included"
 
   errors:
     messages:
