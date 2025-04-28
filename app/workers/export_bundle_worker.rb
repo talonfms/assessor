@@ -14,25 +14,43 @@ class ExportBundleWorker
 
     temp_dir = Dir.mktmpdir
     zip_path = "#{temp_dir}/export_bundle_#{Time.now.to_i}.zip"
+    csv_path = nil
+    bundle = assessment.export_bundle
+    name = assessment.name.gsub(" ", "_")
 
     begin
-      csv_content = generate_csv(assessment) if assessment.survey_responses.present?
-      csv_path = "#{temp_dir}/responses_export.csv"
-      File.write(csv_path, csv_content)
+      if assessment.survey_responses.present?
+        csv_content = generate_csv(assessment) if assessment.survey_responses.present?
+        csv_path = "#{temp_dir}/responses_export.csv"
+        File.write(csv_path, csv_content)
+      end
 
       attachment_file_paths = collect_attachments_into_dir(assessment, temp_dir)
 
-      create_zip_file(zip_path, [csv_path] + attachment_file_paths)
-
-      bundle = assessment.export_bundle
-
-      name = assessment.name.gsub(" ", "_")
-
-      bundle.file.attach(
-        io: File.open(zip_path),
-        filename: "assessment_export_#{name}_#{assessment.id}.zip",
-        content_type: "application/zip"
-      )
+      # create and attach zip file (including CSV) if files and csv are present
+      if csv_path.present? && attachment_file_paths.present?
+        create_zip_file(zip_path, [csv_path] + attachment_file_paths)
+        bundle.file.attach(
+          io: File.open(zip_path),
+          filename: "assessment_export_#{name}_#{assessment.id}.zip",
+          content_type: "application/zip"
+        )
+      # create and attach zip file (only attachments) if only attachments are present, no CSV
+      elsif attachment_file_paths.present?
+        create_zip_file(zip_path, attachment_file_paths)
+        bundle.file.attach(
+          io: File.open(zip_path),
+          filename: "assessment_export_#{name}_#{assessment.id}.zip",
+          content_type: "application/zip"
+        )
+      # create and attach CSV file only if no attachments are present
+      else
+        bundle.file.attach(
+          io: File.open(csv_path),
+          filename: "assessment_export_#{name}_#{assessment.id}_surveys.csv",
+          content_type: "text/csv"
+        )
+      end
 
       if bundle.file.attached?
         bundle.update!(error_message: nil, status: "completed")

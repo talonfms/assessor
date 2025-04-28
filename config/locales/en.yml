@@ -211,6 +211,7 @@ en:
     new:
       name: "Name"
       survey_template_version: "Survey Template Version"
+      no_survey: "No survey"
       default_name: "Services Health Check"
     show:
       assessment_input: "Assessment Input"
@@ -641,6 +642,8 @@ en:
           attributes:
             admin:
               cannot_be_removed: "role cannot be removed for the account owner"
+        assessment:
+          no_checks: "At least one check type (Survey, Finance, or SOW) must be included"
 
   errors:
     messages:

@@ -45,9 +45,9 @@ class ExportBundleWorkerTest < ActiveSupport::TestCase
     assert_equal "completed", @export_bundle.status
   end
 
-  test "should set export_bundle status to errored if file is not attached" do
-    @worker.stubs(:generate_csv).returns("mock_csv_content")
-    @worker.stubs(:create_zip_file).raises(StandardError.new("File creation failed"))
+  test "should set export_bundle status to errored if there are no files to include" do
+    @assessment.survey_responses.destroy_all
+    @worker.stubs(:collect_attachments_into_dir).returns([])
 
     @worker.perform(@assessment.id)
 
