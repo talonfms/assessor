@@ -6,6 +6,13 @@ class ConvertResponsesToCsvTest < ActiveSupport::TestCase
 
   def setup
     @assessment = assessments(:one)
+    template_version_two = template_versions(:two)
+    survey_response_two = survey_responses(:two)
+    # ensure that the csv generator retrieves the correct name and email blocks
+    block_1 = Block.create!(question: "Full Name:", block_type: "short_text", template_version: template_version_two)
+    block_2 = Block.create!(question: "Email:", block_type: "short_text", template_version: template_version_two)
+    Response.create!(survey_response: survey_response_two, block: block_1, response_data: {"text" => "wrong-name@example.com"})
+    Response.create!(survey_response: survey_response_two, block: block_2, response_data: {"text" => "WRONG NAME"})
   end
 
   test "should generate CSV string with respondent and respondent_email present" do

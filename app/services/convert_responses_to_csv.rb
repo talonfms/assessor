@@ -52,13 +52,13 @@ class ConvertResponsesToCsv
   def extract_name_from_survey_response(sr)
     return sr.respondent&.name if sr.respondent.present?
 
-    sr.responses.find_by(block_id: Block.find_by(question: "Full Name:")&.id)&.response_data&.[]("text")
+    sr.responses.find_by(block_id: @assessment.template_version.blocks.find_by(question: "Full Name:")&.id)&.response_data&.[]("text")
   end
 
   def extract_email_from_survey_response(sr)
     return sr.respondent_email if sr.respondent_email.present?
 
-    sr.responses.find_by(block_id: Block.find_by(question: "Email:")&.id)&.response_data&.[]("text")
+    sr.responses.find_by(block_id: @assessment.template_version.blocks.find_by(question: "Email:")&.id)&.response_data&.[]("text")
   end
 
   def filtered_responses(sr)
