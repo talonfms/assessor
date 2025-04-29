@@ -15,7 +15,7 @@
   <% if action_name != "show" && show_link %>
     <%= link_to I18n.t('assessments.preview.view'), assessment, class: "btn btn-secondary" %>
   <% end %>
-  <% if Current.account_user&.admin? && assessment.submitted? && assessment.export_bundle&.completed? %>
+  <% if Current.account_user&.admin? && assessment.submitted? && assessment.export_bundle&.completed? && show_link %>
     <%= link_to I18n.t('assessments.preview.download'), download_bundle_assessment_path(assessment), method: :get, class: "btn btn-secondary" %>
   <% end %>
 </div>
