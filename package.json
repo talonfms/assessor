@@ -8,7 +8,7 @@
     "@rails/actioncable": "^8.0.0-beta1",
     "@rails/actiontext": "^8.0.0-beta1",
     "@rails/activestorage": "^8.0.0-beta1",
-    "@rails/request.js": "^0.0.11",
+    "@rails/request.js": "^0.0.12",
     "@stimulus-components/auto-submit": "^6.0.0",
     "@stimulus-components/sortable": "^5.0.1",
     "@tailwindcss/aspect-ratio": "^0.4.0",
